@@ -1,21 +1,23 @@
-#include <string.h>
-
-typedef enum bool {false, true} bool;
-
 typedef int datatype;
 #define FORMATSTR "%d"
 #define ELEMSIZE 20
-#define BSTTYPE "Linked"
+#define BSTTYPE "Realloc"
+
+/* Probably (2^n) -1 */
+#define INITSIZE 31
+#define SCALEFACTOR 2
+
+typedef enum bool {false, true} bool;
 
 struct dataframe {
    datatype d;
-   struct dataframe* left;
-   struct dataframe* right;
+   bool isvalid;
 };
 typedef struct dataframe dataframe;
 
 struct bst {
-   dataframe* top;
+   dataframe* a;
+   int capacity;
    /* Data element size, in bytes */
 };
 typedef struct bst bst;

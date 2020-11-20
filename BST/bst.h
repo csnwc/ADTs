@@ -4,9 +4,6 @@ typedef struct stack stack;
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <string.h>
-
-typedef enum bool {false, true} bool;
 
 bst* bst_init(void);
 

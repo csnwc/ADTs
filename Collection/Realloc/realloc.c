@@ -35,11 +35,8 @@ void coll_add(coll* c, datatype d)
       c->a[c->size] = d;
       c->size = c->size + 1;
       if(c->size >= c->capacity){
-         c->a = (datatype*) realloc(c->a, sizeof(datatype)*c->capacity*SCALEFACTOR);
+         c->a = (datatype*) nrealloc(c->a, sizeof(datatype)*c->capacity*SCALEFACTOR);
          c->capacity = c->capacity*SCALEFACTOR;
-         if(c->a == NULL){
-            on_error("Collection overflow");
-         }
       }
    }
 }

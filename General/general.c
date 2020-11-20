@@ -15,6 +15,26 @@ void* ncalloc(int n, size_t size)
    return v;
 }
 
+void* nrecalloc(void* p, int oldsz, int newsz)
+{
+   void* v = calloc(newsz, 1);
+   if(v==NULL){
+      on_error("Cannot calloc() space");
+   }
+   memcpy(v, p, oldsz);
+   free(p);
+   return v;
+}
+
+void* nrealloc(void* p, int n)
+{
+   void* v = realloc(p, n);
+   if(v==NULL){
+      on_error("Cannot calloc() space");
+   }
+   return v;
+}
+
 void* nfopen(char* fname, char* mode)
 {
    FILE* fp;

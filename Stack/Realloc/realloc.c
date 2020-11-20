@@ -22,7 +22,7 @@ void stack_push(stack* s, datatype d)
    s->a[s->size] = d;
    s->size = s->size + 1;
    if(s->size >= s->capacity){
-      s->a = (datatype*) realloc(s->a, sizeof(datatype)*s->capacity*SCALEFACTOR);
+      s->a = (datatype*) nrealloc(s->a, sizeof(datatype)*s->capacity*SCALEFACTOR);
       s->capacity = s->capacity*SCALEFACTOR;
       if(s->a == NULL){
          on_error("Stack overflow");
