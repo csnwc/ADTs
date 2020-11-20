@@ -1,3 +1,4 @@
+/* A trivial demonstration of the stack ADT */
 #include "specific.h"
 #include "stack.h"
 
