@@ -1,3 +1,3 @@
 # ADTs
 COMSM1201 ADTs 
-Includes Collection, STack, Queue and BST
+Includes Collection, Stack, Queue and BST
