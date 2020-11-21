@@ -5,6 +5,7 @@ void _freeframes(dataframe* frame);
 dataframe* _insert(dataframe* t, datatype d);
 bool _isin(dataframe* t, datatype d);
 int _size(dataframe* b);
+char* _printlisp(dataframe* t);
 
 bst* bst_init(void)
 {
@@ -51,6 +52,17 @@ bool bst_insertarray(bst* b, datatype* a, int n)
       bst_insert(b, a[i]);
    }
    return true;
+}
+
+char* bst_printlisp(bst* b)
+{
+   char* str;
+   if(b==NULL){ 
+      str = ncalloc(1,1);
+      str[0] = '\0';
+      return str;
+   }
+   return _printlisp(b->top);
 }
 
 bool bst_free(bst* b)
@@ -121,4 +133,24 @@ int _size(dataframe* t)
       return 0;
    }
    return 1 + _size(t->left) + _size(t->right);
+}
+
+char* _printlisp(dataframe* t)
+{
+   char tmp[ELEMSIZE];
+   char *s1, *s2, *p;
+   
+   if(t==NULL){
+      /*  \0 string */
+      p = ncalloc(1,1);
+      return p;
+   }
+   sprintf(tmp, FORMATSTR, t->d);
+   s1 = _printlisp(t->left);
+   s2 = _printlisp(t->right);
+   p = ncalloc(strlen(s1)+strlen(s2)+strlen(tmp)+strlen("()() "), 1);
+   sprintf(p, "%s(%s)(%s)", tmp, s1, s2);
+   free(s1);
+   free(s2);
+   return p;
 }
