@@ -6,7 +6,7 @@ VALGRIND= $(COMMON) $(DEBUG)
 PRODUCTION= $(COMMON) -O3
 LDLIBS =
 
-all: testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v revstr_realloc revstr_linked pdfs
+all: testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v pdfs
 
 testrealloc : bst.h Realloc/specific.h Realloc/realloc.c testbst.c ../General/general.h ../General/general.c
 	$(CC) testbst.c Realloc/realloc.c ../General/general.c -o testrealloc -I./Realloc $(PRODUCTION) $(LDLIBS)
@@ -27,17 +27,8 @@ testlinked_v: bst.h Linked/specific.h Linked/linked.c testbst.c ../General/gener
 	$(CC) testbst.c Linked/linked.c ../General/general.c -o testlinked_v -I./Linked $(VALGRIND) $(LDLIBS)
 
 
-
-revstr_linked : revstr.c bst.h Linked/specific.h Linked/linked.c ../General/general.h ../General/general.c
-	$(CC) revstr.c Linked/linked.c ../General/general.c -o revstr_linked -I./Linked $(SANITIZE) $(LDLIBS)
-
-revstr_realloc : revstr.c bst.h Realloc/specific.h Realloc/realloc.c ../General/general.h ../General/general.c
-	$(CC) revstr.c Realloc/realloc.c ../General/general.c -o revstr_realloc -I./Realloc $(SANITIZE) $(LDLIBS)
-
-
-
 clean:
-	rm -f testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v Linkeds.dot Linkeds.pdf Reallocs.dot Reallocs.pdf revstr_realloc revstr_linked
+	rm -f testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v Linkeds.dot Linkeds.pdf Reallocs.dot Reallocs.pdf 
 
 run: all
 	./testrealloc_s
