@@ -21,3 +21,8 @@ bool bst_insertarray(bst* b, datatype* a, int n);
 
 /* Clear all memory associated with tree, & set pointer to NULL */
 bool bst_free(bst* b);
+
+/* Optional ? */
+
+/* Create string with tree as ((head)(left)(right)) */
+char* bst_printlisp(bst* b);

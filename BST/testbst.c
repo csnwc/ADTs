@@ -7,6 +7,7 @@ int main(void)
 {
 
    bst* b;
+   char* str;
    datatype arr[ARRSIZE] = {1,50,2,49,3,48,4,47,5,46,6,45,7,44,8,43,9,42};
 
    printf("Test BST (%s) Start ... ", BSTTYPE);
@@ -19,6 +20,8 @@ int main(void)
    assert(bst_size(b)==0);
    assert(bst_insert(b, 50));
    assert(bst_size(b)==1);
+   str = bst_printlisp(b);
+   assert(strcmp(str, "50()()")==0); free(str);
    assert(bst_isin(b, 50));
    assert(bst_insert(b, 10));
    assert(bst_size(b)==2);
@@ -26,6 +29,8 @@ int main(void)
    assert(bst_insert(b, 90));
    assert(bst_size(b)==3);
    assert(bst_isin(b, 90));
+   str = bst_printlisp(b);
+   assert(strcmp(str, "50(90()())(10()())")==0); free(str);
    assert(bst_free(b));
 
    b = bst_init();
