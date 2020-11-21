@@ -1,10 +1,13 @@
 #include "specific.h"
 #include "bst.h"
 
+#define ARRSIZE 18
+
 int main(void)
 {
 
    bst* b;
+   datatype arr[ARRSIZE] = {1,50,2,49,3,48,4,47,5,46,6,45,7,44,8,43,9,42};
 
    printf("Test BST (%s) Start ... ", BSTTYPE);
 
@@ -23,6 +26,11 @@ int main(void)
    assert(bst_insert(b, 90));
    assert(bst_size(b)==3);
    assert(bst_isin(b, 90));
+   assert(bst_free(b));
+
+   b = bst_init();
+   bst_insertarray(b, arr, ARRSIZE);
+   assert(bst_size(b)==ARRSIZE);
 
    assert(bst_free(b));
    printf("END\n");

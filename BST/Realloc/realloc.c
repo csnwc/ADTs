@@ -3,17 +3,18 @@
 
 void _freeframes(dataframe* frame);
 bool _insert(bst* b, datatype d, int c);
-bool _isin(dataframe* t, datatype d, int c);
-int _size(dataframe* a, int c);
+bool _isin(bst* b, datatype d, int c);
+int _size(bst* b, int c);
 int _leftchild(int c);
 int _rightchild(int c);
 void _safewrite(bst* b, datatype d, int c);
+bool _safeisvalid(bst* b, int c);
 
 bst* bst_init(void)
 {
    bst* b = (bst*) ncalloc(1, sizeof(bst));
    b->capacity = INITSIZE;
-   b->a = (dataframe*) ncalloc(INITSIZE, sizeof(dataframe));
+   b->a = (dataframe*) ncalloc(b->capacity, sizeof(dataframe));
    return b;
 }
 
@@ -22,7 +23,7 @@ int bst_size(bst* b)
    if(b==NULL){
       return 0;
    }
-   return _size(b->a, 0);
+   return _size(b, 0);
 }
 
 bool bst_insert(bst* b, datatype d)
@@ -38,7 +39,7 @@ bool bst_isin(bst* b, datatype d)
    if(b==NULL){
       return false;
    }
-   return _isin(b->a, d, 0);
+   return _isin(b, d, 0);
 }
 
 bool bst_insertarray(bst* b, datatype* a, int n)
@@ -70,42 +71,48 @@ bool bst_free(bst* b)
 /* Based on geekforgeeks.org */
 bool _insert(bst* b, datatype d, int c)
 {
-    /* If the tree is empty, return a new frame */
-    if (!b->a[c].isvalid){
+    datatype i;
+    if (!_safeisvalid(b, c)){
        _safewrite(b, d, c);
        return true;
     }
     /* Otherwise, recurs down the tree */
-    if (b->a[c].d < d){
+    i = b->a[c].d;
+    if (i < d){
         return _insert(b, d, _leftchild(c));
     }
-    if(b->a[c].d > d){
+    if(i > d){
        return _insert(b, d, _rightchild(c));
     }
     /* Must be the same, ignore */
     return true;
 }
 
-bool _isin(dataframe* a, datatype d, int c)
+bool _isin(bst* b, datatype d, int c)
 {
-   if(a[c].d == d){
+   datatype i;
+   if (!_safeisvalid(b, c)){
+      return false;
+   }
+   i = b->a[c].d;
+   if(i == d){
       return true;
    }
-   if(a[c].d < d){
-      return _isin(a, d, _leftchild(c));
+   if(i < d){
+      return _isin(b, d, _leftchild(c));
    }
    else{
-      return _isin(a, d, _rightchild(c));
+      return _isin(b, d, _rightchild(c));
    }
    return false;
 }
 
-int _size(dataframe* a, int c)
+int _size(bst* b, int c)
 {
-   if(!a[c].isvalid){
+   if(!_safeisvalid(b, c)){
       return 0;
    }
-   return 1 + _size(a, _leftchild(c)) + _size(a, _rightchild(c));
+   return 1 + _size(b, _leftchild(c)) + _size(b, _rightchild(c));
 }
 
 int _leftchild(int c)
@@ -121,10 +128,20 @@ int _rightchild(int c)
 void _safewrite(bst* b, datatype d, int c)
 {
    int newsz;
-   if(c >= b->capacity){
+   /* Resize, but how much ? */
+   while(c >= b->capacity){
       newsz = (b->capacity+1)*SCALEFACTOR-1;
-      b->a = nrecalloc(b->a, b->capacity, newsz);
+      b->a = nrecalloc(b->a, b->capacity*sizeof(dataframe), newsz*sizeof(dataframe));
+      b->capacity = newsz;
    }
    b->a[c].d = d;
    b->a[c].isvalid = true;
+}
+
+bool _safeisvalid(bst* b, int c)
+{
+   if(c >= b->capacity){
+      return false;
+   }
+   return b->a[c].isvalid;
 }

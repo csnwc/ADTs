@@ -24,9 +24,6 @@ void stack_push(stack* s, datatype d)
    if(s->size >= s->capacity){
       s->a = (datatype*) nrealloc(s->a, sizeof(datatype)*s->capacity*SCALEFACTOR);
       s->capacity = s->capacity*SCALEFACTOR;
-      if(s->a == NULL){
-         on_error("Stack overflow");
-      }
    }
 }
 

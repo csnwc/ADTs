@@ -15,15 +15,15 @@ void* ncalloc(int n, size_t size)
    return v;
 }
 
-void* nrecalloc(void* p, int oldsz, int newsz)
+void* nrecalloc(void* p, int oldbytes, int newbytes)
 {
-   void* v = calloc(newsz, 1);
-   if(v==NULL){
+   void* n = calloc(newbytes, 1);
+   if(n==NULL){
       on_error("Cannot calloc() space");
    }
-   memcpy(v, p, oldsz);
+   memcpy(n, p, oldbytes);
    free(p);
-   return v;
+   return n;
 }
 
 void* nrealloc(void* p, int n)
