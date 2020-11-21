@@ -26,13 +26,13 @@ void* nrecalloc(void* p, int oldbytes, int newbytes)
    return n;
 }
 
-void* nrealloc(void* p, int n)
+void* nremalloc(void* p, int bytes)
 {
-   void* v = realloc(p, n);
-   if(v==NULL){
-      on_error("Cannot calloc() space");
+   void* n = realloc(p, bytes);
+   if(n==NULL){
+      on_error("Cannot malloc() space");
    }
-   return v;
+   return n;
 }
 
 void* nfopen(char* fname, char* mode)
