@@ -28,7 +28,7 @@ testlinked_v: bst.h Linked/specific.h Linked/linked.c testbst.c ../General/gener
 
 
 clean:
-	rm -f testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v Linkeds.dot Linkeds.pdf Reallocs.dot Reallocs.pdf 
+	rm -f testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v Linkedb.dot Linkedb.pdf Reallocb.dot Reallocb.pdf 
 
 run: all
 	./testrealloc_s
@@ -70,20 +70,20 @@ run: all
 
 DOT := $(shell command -v dot 2> /dev/null)
 
-Linkeds.dot:  testlinked
+Linkedb.dot:  testlinked
 	./testlinked
-Reallocs.dot: testrealloc
+Reallocb.dot: testrealloc
 	./testrealloc
 
-Linkeds.pdf:  testbst.c testlinked Linkeds.dot
+Linkedb.pdf:  testbst.c testlinked Linkedb.dot
 ifndef DOT
     $(error "dot is not available please install graphviz")
 endif
-	dot -Tpdf -o Linkeds.pdf Linkeds.dot
-Reallocs.pdf:  testbst.c testrealloc Reallocs.dot
+	dot -Tpdf -o Linkedb.pdf Linkedb.dot
+Reallocb.pdf:  testbst.c testrealloc Reallocb.dot
 ifndef DOT
     $(error "dot is not available please install graphviz")
 endif
-	dot -Tpdf -o Reallocs.pdf Reallocs.dot
+	dot -Tpdf -o Reallocb.pdf Reallocb.dot
 
-pdfs : Linkeds.pdf Reallocs.pdf
+pdfs : Linkedb.pdf Reallocb.pdf

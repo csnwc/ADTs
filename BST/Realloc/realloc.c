@@ -1,6 +1,8 @@
 #include "specific.h"
 #include "../bst.h"
 
+#define NODELINE 30
+
 void _freeframes(dataframe* frame);
 bool _insert(bst* b, datatype d, int c);
 bool _isin(bst* b, datatype d, int c);
@@ -11,6 +13,7 @@ int _parent(int c);
 void _write(bst* b, datatype d, int c);
 bool _isvalid(bst* b, int c);
 char* _printlisp(bst* b, int c);
+void _todot(bst* b, int c, char* nodes);
 
 bst* bst_init(void)
 {
@@ -75,6 +78,30 @@ char* bst_printlisp(bst* b)
    }
    return _printlisp(b, 0);
 }
+
+void bst_todot(bst* b, char* fname)
+{
+
+   FILE* fp;
+   char* str;
+   char* opname;
+   if(b==NULL){
+      return;
+   }
+   str = ncalloc(1, (ELEMSIZE+NODELINE)*b->capacity);
+   sprintf(str, "digraph G {\n   node [shape=record, height=0.1];\n");
+   _todot(b, 0, str);
+   strcat(str, "}\n");
+   opname = ncalloc(1, strlen(fname)+strlen(BSTTYPE)+1);
+   sprintf(opname, "%s%s", BSTTYPE, fname);
+   fp = nfopen(opname, "wt"); 
+   fprintf(fp, "%s", str);
+   fclose(fp);
+   free(str);
+   free(opname);
+
+}
+
 
 /******************************************************************/
 /*                      Auxiliary Functions                       */
@@ -181,4 +208,41 @@ char* _printlisp(bst* b, int c)
    free(s1);
    free(s2);
    return p;
+}
+/*
+digraph G {
+
+   node [shape=record, height=0.1];
+   node0 [label = "<l> | <m> H | <r>"];
+   node1 [label = "<l> | <m> D | <r>"];
+   node2 [label = "<l> | <m> A | <r>"];
+   node3 [label = "<l> | <m> P | <r>"];
+   node4 [label = "<l> | <m> W | <r>"];
+   node0:l -> node1:m;
+   node1:l -> node2:m;
+   node0:r -> node3:m;
+   node1:r -> node4:m;
+
+}
+*/
+void _todot(bst* b, int c, char* nodes)
+{
+   int p;
+   char tmp[1000];
+   char fstr[1000];
+   if(! _isvalid(b, c)){
+      return;
+   }
+   sprintf(fstr, FORMATSTR, b->a[c].d);
+   sprintf(tmp, "   node%d [label = \"<l> | <m> %s | <r>\"];\n", c, fstr);
+   strcat(nodes, tmp);
+   /* Not top of tree */
+   if(c>0){
+      p = _parent(c);
+      sprintf(tmp, "   node%d:%c -> node%d:m;\n", p, (c%2)?'r':'l', c);
+      strcat(nodes, tmp);
+   }
+   _todot(b,  _leftchild(c), nodes);
+   _todot(b, _rightchild(c), nodes);
+
 }

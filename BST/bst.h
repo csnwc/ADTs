@@ -26,3 +26,6 @@ bool bst_free(bst* b);
 
 /* Create string with tree as ((head)(left)(right)) */
 char* bst_printlisp(bst* b);
+
+/* Use Graphviz via a .dot file */
+void bst_todot(bst* b, char* dotname);
