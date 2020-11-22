@@ -1,5 +1,4 @@
 #include "../General/general.h"
-typedef struct stack stack;
 
 #include <stdio.h>
 #include <stdlib.h>
