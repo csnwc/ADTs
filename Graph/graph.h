@@ -3,10 +3,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <limits.h>
 #include <assert.h>
 
-#define INF HUGE_VAL
+#define INF (INT_MAX)
 
 typedef enum bool {false, true} bool;
 

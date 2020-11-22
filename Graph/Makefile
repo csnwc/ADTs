@@ -28,12 +28,12 @@ testlinked_v: graph.h Linked/specific.h Linked/linked.c testgraph.c ../General/g
 
 
 clean:
-	rm -f testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v Linkedb.dot Linkedb.pdf Reallocb.dot Reallocb.pdf 
+	rm -f testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v Linkedg.dot Linkedg.pdf Reallocg.dot Reallocg.pdf 
 
 run: all
 	./testrealloc_s
-	./testlinked_s
 	valgrind ./testrealloc_v
+	./testlinked_s
 	valgrind ./testlinked_v
 
 
@@ -70,20 +70,20 @@ run: all
 
 DOT := $(shell command -v dot 2> /dev/null)
 
-Linkedb.dot:  testlinked
+Linkedg.dot:  testlinked
 	./testlinked
-Reallocb.dot: testrealloc
+Reallocg.dot: testrealloc
 	./testrealloc
 
-Linkedb.pdf:  testgraph.c testlinked Linkedb.dot
+Linkedg.pdf:  testgraph.c testlinked Linkedg.dot
 ifndef DOT
     $(error "dot is not available please install graphviz")
 endif
-	dot -Tpdf -o Linkedb.pdf Linkedb.dot
-Reallocb.pdf:  testgraph.c testrealloc Reallocb.dot
+	dot -Tpdf -o Linkedg.pdf Linkedg.dot
+Reallocg.pdf:  testgraph.c testrealloc Reallocg.dot
 ifndef DOT
     $(error "dot is not available please install graphviz")
 endif
-	dot -Tpdf -o Reallocb.pdf Reallocb.dot
+	dot -Tpdf -o Reallocg.pdf Reallocg.dot
 
-pdfs : Linkedb.pdf Reallocb.pdf
+pdfs : Linkedg.pdf Reallocg.pdf
