@@ -3,13 +3,14 @@
 #define INITSIZE 8
 #define SCALEFACTOR 2
 
-typedef enum bool {false, true} bool;
+typedef unsigned int edge;
 
-struct bst {
+struct graph {
    edge** adjMat;
    char** labels;
+   /* Actual number of verts */
    int size;
+   /* Max verts before realloc() */
    int capacity;
-   /* Data element size, in bytes */
 };
-typedef struct bst bst;
+typedef struct graph graph;

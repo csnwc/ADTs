@@ -1,15 +1,17 @@
 #include "../General/general.h"
+#include "specific.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 
-typedef unsigned double edge;
+typedef enum bool {false, true} bool;
+
 /* Initialise an empty graph */
 graph* graph_init(void);
 
 /* Add new vertex */
-bool graph_addVert(graph* g, char* label)
+bool graph_addVert(graph* g, char* label);
 
 /* Add new edge between two Vertices */
 int graph_addEdge(graph* g,  char* from, char* to, edge weight);
