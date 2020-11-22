@@ -7,6 +7,14 @@ int main(void)
 
    printf("Test Graph (%s) Start ... ", GRAPHTYPE);
 
+   assert(!graph_addVert(NULL, "A"));
+   g = graph_init();
+   assert(graph_addVert(g, "A"));
+   assert(graph_addVert(g, "B"));
+   assert(graph_addEdge(g, 0, 1, 100));
+
+   assert(graph_free(g));
+   printf("End\n");
    return 0;
 
 }

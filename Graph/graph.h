@@ -3,7 +3,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <assert.h>
+
+#define INF HUGE_VAL
 
 typedef enum bool {false, true} bool;
 
@@ -14,7 +17,7 @@ graph* graph_init(void);
 bool graph_addVert(graph* g, char* label);
 
 /* Add new edge between two Vertices */
-int graph_addEdge(graph* g,  char* from, char* to, edge weight);
+bool graph_addEdge(graph* g,  int from, int to, edge weight);
 
 /* Clear all memory associated with graph */
 bool graph_free(graph* g);
