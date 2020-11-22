@@ -23,6 +23,9 @@ bool graph_addEdge(graph* g,  int from, int to, edge weight);
    else 0 ... (size-1)                   */
 int graph_getVertNum(graph* g, char* label);
 
+/* Returns edge weight - if none = INF */
+edge graph_getEdgeWeight(graph* g, int from, int to);
+
 /* Number of verts */
 int graph_numVerts(graph* b);
 

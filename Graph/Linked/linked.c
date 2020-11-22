@@ -7,23 +7,11 @@ int _countedges(graph* g);
 
 graph* graph_init(void)
 {
-   int h, w;
-   int i, j;
    graph* g = (graph*) ncalloc(sizeof(graph), 1);
-   h = INITSIZE;
-   w = h;
-   g->capacity = h;
-   g->adjMat = (edge**) n2dcalloc(h, w, sizeof(edge));
-   g->labels = (char**) n2dcalloc(h, MAXLABEL+1, sizeof(char));
-   for(j=0; j<h; j++){
-      for(i=0; i<w; i++){
-         /* It's not clear if weight[j][j] should be 0 or INF */
-         g->adjMat[j][i] = INF;
-      }
-   }
    return g;
 }
 
+/*
 edge graph_getEdgeWeight(graph* g, int from, int to)
 {
    if((g==NULL) || (from >= g->size) || (to >= g->size)){
@@ -31,20 +19,29 @@ edge graph_getEdgeWeight(graph* g, int from, int to)
    }
    return g->adjMat[from][to];
 }
+*/
 
 
 int graph_numVerts(graph* g)
 {
+   vertex* v;
+   int cnt = 0;
    if(g==NULL){
       return 0;
    }
-   return g->size;
+   v = g->firstv;
+   while(v != NULL){
+      cnt++;
+      v = v->nextv;
+   }
+   return cnt;
 }
 
 bool graph_free(graph* g)
 {
-   n2dfree((void**)g->adjMat, g->capacity);
-   n2dfree((void**)g->labels, g->capacity);
+   if(g==NULL){
+      return false;
+   }
    free(g);
    return true;
 }
@@ -52,17 +49,30 @@ bool graph_free(graph* g)
 int graph_addVert(graph* g, char* label)
 {
 
+   vertex* n;
    if(g==NULL){
+      printf("addVert NULL\n");
       return NO_VERT;
    }
    if(graph_getVertNum(g, label) != NO_VERT){
+      printf("Already got it\n");
       return NO_VERT;
    }
-   /* Resize */
-   if(g->size >= g->capacity){
-      n2drealloc();
+
+   printf("Doof\n");
+   n = ncalloc(sizeof(vertex), 1);
+   n->label = ncalloc(strlen(label)+1, 1);
+   strcpy(n->label, label);
+   if(g->firstv == NULL){
+      printf("addVert front\n");
+      /* Put in front */
+      g->firstv = n;
    }
-   strcpy(g->labels[g->size], label);
+   else{
+      /* Add to end */
+      g->endv->nextv = n;
+   }
+   g->endv = n;
    g->size = g->size + 1;
    return g->size-1;
 }
@@ -75,10 +85,18 @@ bool graph_addEdge(graph* g, int from, int to, edge w)
    if((from >= g->size) || (to >= g->size)){
       return false;
    }
-   g->adjMat[from][to] = w;
-   return true;
+   f = g->firstv;
+   for(i=0; i<from; i++){
+      f = f->nextv;
+   }
+   t = t->firstv;
+   for(i=0; i<to; i++){
+      t = t->nextv;
+   }
+   return _addEdge(f, t, w);
 }
 
+/*
 void graph_todot(graph* g, char* dotname)
 {
    int f, t;
@@ -100,19 +118,24 @@ void graph_todot(graph* g, char* dotname)
    fclose(fp);
    free(fname);
 }
+*/
 
 int graph_getVertNum(graph* g, char* label)
 {
-   int f;
-   for(f=0; f<g->size; f++){
-      if(strcmp(g->labels[f], label)==0){
-         return f;
+   int cnt = 0;
+   vertex* v;
+   v = g->firstv;
+   while(v != NULL){
+      if(strcmp(v->label, label)==0){
+         return cnt;
       }
+      v = v->nextv;
+      cnt++;
    }
    return NO_VERT;
-
 }
 
+/*
 void graph_tostring(graph* g, char* str)
 {
    int f, t;
@@ -135,11 +158,26 @@ void graph_tostring(graph* g, char* str)
       }
    }
 }
+*/
 
 /************************************************************************/
 /*                       Auxiliary Functions                            */
 /************************************************************************/
 
+bool _addEdge(vertex* f, vertex* t, edge w)
+{
+
+   edgel* e;
+   if(f->firste ==NULL){
+      /* 1st */
+      f->nexte = ncalloc((sizeof)edgel, 1);
+      f->nexte->v = t;
+   }
+
+
+}
+
+/*
 bool _isedge(graph* g, int f, int t)
 {
    return (g->adjMat[f][t] == INF) ? false : true;
@@ -156,3 +194,4 @@ int _countedges(graph* g)
    }
    return cnt;
 }
+*/
