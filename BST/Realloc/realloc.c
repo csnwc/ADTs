@@ -117,10 +117,10 @@ bool _insert(bst* b, datatype d, int c)
     }
     /* Otherwise, recurs down the tree */
     i = b->a[c].d;
-    if (i < d){
+    if (d < i){
         return _insert(b, d, _leftchild(c));
     }
-    if(i > d){
+    if(d > i){
        return _insert(b, d, _rightchild(c));
     }
     /* Must be the same, ignore */
@@ -137,7 +137,7 @@ bool _isin(bst* b, datatype d, int c)
    if(i == d){
       return true;
    }
-   if(i < d){
+   if(d < i){
       return _isin(b, d, _leftchild(c));
    }
    else{
@@ -239,7 +239,7 @@ void _todot(bst* b, int c, char* nodes)
    /* Not top of tree */
    if(c>0){
       p = _parent(c);
-      sprintf(tmp, "   node%d:%c -> node%d:m;\n", p, (c%2)?'r':'l', c);
+      sprintf(tmp, "   node%d:%c -> node%d:m;\n", p, (c%2)?'l':'r', c);
       strcat(nodes, tmp);
    }
    _todot(b,  _leftchild(c), nodes);

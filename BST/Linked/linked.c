@@ -1,11 +1,14 @@
 #include "specific.h"
 #include "../bst.h"
 
+#define NODELINE 100
+
 void _freeframes(dataframe* frame);
 dataframe* _insert(dataframe* t, datatype d);
 bool _isin(dataframe* t, datatype d);
 int _size(dataframe* b);
 char* _printlisp(dataframe* t);
+void _todot(dataframe* t, char* nodes, dataframe* parent, char plr);
 
 bst* bst_init(void)
 {
@@ -75,8 +78,33 @@ bool bst_free(bst* b)
    return true;
 }
 
+void bst_todot(bst* b, char* fname)
+{
+
+   FILE* fp;
+   char* str;
+   char* opname;
+   if(b==NULL){
+      return;
+   }
+   printf("Size:%d\n", (ELEMSIZE+NODELINE)*bst_size(b));
+   str = ncalloc(1, (ELEMSIZE+NODELINE)*bst_size(b));
+   sprintf(str, "digraph G {\n   node [shape=record, height=0.1];\n");
+   _todot(b->top, str, NULL, 'X');
+   strcat(str, "}\n");
+   opname = ncalloc(1, strlen(fname)+strlen(BSTTYPE)+1);
+   sprintf(opname, "%s%s", BSTTYPE, fname);
+   fp = nfopen(opname, "wt"); 
+   fprintf(fp, "%s", str);
+   fclose(fp);
+   free(str);
+   free(opname);
+
+}
+
+
 /*****************************************************************/
-/*                      Auxilary Functions                       */
+/*                      Auxiliary Functions                       */
 /*****************************************************************/
 
 /* Based on geekforgeeks.org */
@@ -90,10 +118,10 @@ dataframe* _insert(dataframe* t, datatype d)
        return f;
     }
     /* Otherwise, recurs down the tree */
-    if (t->d < d){
+    if (d < t->d){
         t->left = _insert(t->left, d);
     }
-    else if(t->d > d){
+    else if(d > t->d){
        t->right = _insert(t->right, d);
     }
     /* return the (unchanged) dataframe pointer */
@@ -108,7 +136,7 @@ bool _isin(dataframe* t, datatype d)
    if(t->d == d){
       return true;
    }
-   if(t->d < d){
+   if(d < t->d){
       return _isin(t->left,  d);
    }
    else{
@@ -153,4 +181,23 @@ char* _printlisp(dataframe* t)
    free(s1);
    free(s2);
    return p;
+}
+
+void _todot(dataframe* t, char* nodes, dataframe* parent, char plr)
+{
+   char tmp[1000];
+   char fstr[1000];
+   if(t==NULL){
+      return;
+   }
+   sprintf(fstr, FORMATSTR, t->d);
+   sprintf(tmp, "   node%p [label = \"<l> | <m> %s | <r>\"];\n", (void*)t, fstr);
+   strcat(nodes, tmp);
+   if(parent != NULL){
+      sprintf(tmp, "   node%p:%c -> node%p:m;\n", (void*)parent, plr, (void*)t);
+      strcat(nodes, tmp);
+   }
+   _todot(t->left,  nodes, t, 'l');
+   _todot(t->right, nodes, t, 'r');
+
 }

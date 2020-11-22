@@ -30,7 +30,7 @@ int main(void)
    assert(bst_size(b)==3);
    assert(bst_isin(b, 90));
    str = bst_printlisp(b);
-   assert(strcmp(str, "50(90()())(10()())")==0); free(str);
+   assert(strcmp(str, "50(10()())(90()())")==0); free(str);
    assert(bst_free(b));
 
    b = bst_init();
