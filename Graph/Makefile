@@ -86,4 +86,4 @@ ifndef DOT
 endif
 	dot -Tpdf -o Reallocg.pdf Reallocg.dot
 
-pdfs : Linkedg.pdf Reallocg.pdf
+pdfs : Reallocg.pdf Linkedg.pdf

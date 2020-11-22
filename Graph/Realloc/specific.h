@@ -3,6 +3,8 @@
 #define INITSIZE 8
 #define SCALEFACTOR 2
 
+#define NO_VERT -1
+
 typedef unsigned int edge;
 
 struct graph {

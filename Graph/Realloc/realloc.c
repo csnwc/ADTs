@@ -24,6 +24,38 @@ graph* graph_init(void)
    return g;
 }
 
+void graph_tostring(graph* g, char* str)
+{
+   int f, t;
+   char tmp[1000];
+   str[0] = '\0';
+   if(g==NULL){
+      return;
+   }
+   for(f=0; f<g->size; f++){
+      sprintf(tmp, "%s ", g->labels[f]);
+      strcat(str, tmp);
+   }
+   for(f=0; f<g->size; f++){
+      for(t=0; t<g->size; t++){
+         if(_isedge(g,f,t)){
+            sprintf(tmp, "%d->%d %d ",
+                    f, t, g->adjMat[f][t]);
+            strcat(str, tmp);
+         }
+      }
+   }
+}
+
+
+int graph_numVerts(graph* g)
+{
+   if(g==NULL){
+      return 0;
+   }
+   return g->size;
+}
+
 bool graph_free(graph* g)
 {
    n2dfree((void**)g->adjMat, g->capacity);
@@ -32,23 +64,29 @@ bool graph_free(graph* g)
    return true;
 }
 
-bool graph_addVert(graph* g, char* label)
+int graph_addVert(graph* g, char* label)
 {
 
    if(g==NULL){
-      return false;
+      return NO_VERT;
+   }
+   if(graph_getVertNum(g, label) != NO_VERT){
+      return NO_VERT;
    }
    /* Resize */
    if(g->size >= g->capacity){
    }
    strcpy(g->labels[g->size], label);
    g->size = g->size + 1;
-   return true;
+   return g->size-1;
 }
 
 bool graph_addEdge(graph* g, int from, int to, edge w)
 {
    if((g==NULL) || (g->size == 0)){
+      return false;
+   }
+   if((from >= g->size) || (to >= g->size)){
       return false;
    }
    g->adjMat[from][to] = w;
@@ -74,6 +112,18 @@ void graph_todot(graph* g, char* dotname)
    }
    fprintf(fp, "}\n");
    free(fname);
+}
+
+int graph_getVertNum(graph* g, char* label)
+{
+   int f;
+   for(f=0; f<g->size; f++){
+      if(strcmp(g->labels[f], label)==0){
+         return f;
+      }
+   }
+   return NO_VERT;
+
 }
 
 
