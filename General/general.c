@@ -15,6 +15,32 @@ void* ncalloc(int n, size_t size)
    return v;
 }
 
+void n2dfree(void**p, int h)
+{
+   for(i=0; i<h; i++){
+      free(p[i]);
+   }
+   free(p);
+}
+
+void** n2dcalloc(int h, int w, size_t szelem)
+{
+
+   int i;
+   void** p;
+   p = calloc(h, szelem);
+   if(p==NULL){
+      on_error("Cannot calloc() space");
+   }
+   for(i=0; i<h; i++){
+      p[i] = calloc(w, szelem);
+      if(p[i]==NULL){
+         on_error("Cannot calloc() space");
+      }
+   }
+   return p;
+}
+
 void* nrecalloc(void* p, int oldbytes, int newbytes)
 {
    void* n = calloc(newbytes, 1);
