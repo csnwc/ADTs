@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
+typedef unsigned double edge;
 /* Initialise an empty graph */
 graph* graph_init(void);
 
