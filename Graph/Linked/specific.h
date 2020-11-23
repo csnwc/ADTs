@@ -1,4 +1,4 @@
-#define GRAPHTYPE "Realloc"
+#define GRAPHTYPE "Linked"
 
 #define INITSIZE 8
 #define SCALEFACTOR 2
@@ -10,14 +10,15 @@ typedef unsigned int edge;
 struct vertex {
    char* label;
    struct vertex* nextv;
-   void* edgelist;
+   void* firste;
+   int num;
 };
 typedef struct vertex vertex;
 
 struct edge {
    edge weight;
    vertex* v;
-   vertex* nexte;
+   struct edge* nexte;
 };
 typedef struct edge edgel;
 
