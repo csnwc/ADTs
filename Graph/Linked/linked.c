@@ -55,8 +55,23 @@ int graph_numVerts(graph* g)
 
 bool graph_free(graph* g)
 {
+   vertex* v, *tv;
+   edgel* e, *te;
    if(g==NULL){
       return false;
+   }
+   v = g->firstv;
+   while(v != NULL){
+      e = v->firste;
+      while(e != NULL){
+         te = e->nexte;
+         free(e);
+         e = te;
+      }
+      tv = v->nextv;
+      free(v->label);
+      free(v);
+      v = tv;
    }
    free(g);
    return true;
@@ -214,22 +229,3 @@ bool _addEdge(vertex* f, vertex* t, edge w)
    b->nexte->weight = w;
    return true;
 }
-
-/*
-bool _isedge(graph* g, int f, int t)
-{
-   return (g->adjMat[f][t] == INF) ? false : true;
-}
-
-int _countedges(graph* g)
-{
-   int f, t;
-   int cnt = 0;
-   for(f=0; f<g->size; f++){
-      for(t=0; t<g->size; t++){
-         cnt += _isedge(g, f, t);
-      }
-   }
-   return cnt;
-}
-*/
