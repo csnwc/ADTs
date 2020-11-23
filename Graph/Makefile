@@ -30,7 +30,7 @@ testlinked_v: graph.h Linked/specific.h Linked/linked.c testgraph.c ../General/g
 clean:
 	rm -f testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v Linkedg.dot Linkedg.pdf Reallocg.dot Reallocg.pdf 
 
-run: testrealloc_s testrealloc_v testlinked_s testlinked_v
+run: testrealloc_s testrealloc_v testlinked_s testlinked_v pdfs
 	./testrealloc_s
 	valgrind ./testrealloc_v
 	./testlinked_s
