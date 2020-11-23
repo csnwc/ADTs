@@ -60,7 +60,9 @@ int graph_addVert(graph* g, char* label)
    }
    /* Resize */
    if(g->size >= g->capacity){
-      n2drealloc();
+      g->adjMat = (edge**) n2drecalloc((void**)g->adjMat, g->capacity, g->capacity*SCALEFACTOR, g->capacity, g->capacity*SCALEFACTOR, sizeof(edge));
+      g->labels = (char**) n2drecalloc((void**)g->labels, g->capacity, g->capacity*SCALEFACTOR, MAXLABEL+1, MAXLABEL+1,  1);
+      g->capacity = g->capacity*SCALEFACTOR;
    }
    strcpy(g->labels[g->size], label);
    g->size = g->size + 1;

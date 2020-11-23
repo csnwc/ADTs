@@ -43,6 +43,7 @@ int main(void)
    assert(graph_addVert(g, "F")==5);
    assert(graph_addVert(g, "G")==6);
    assert(graph_addVert(g, "H")==7);
+   assert(graph_addVert(g, "I")==8);
    
    graph_todot(g, "g.dot");
 
