@@ -24,6 +24,20 @@ void n2dfree(void**p, int h)
    free(p);
 }
 
+void** n2drecalloc(void** p, int oh, int nh, int ow, int nw, size_t szelem)
+{
+
+   void** n;
+   int j;
+   n = n2dcalloc(nh, nw, szelem);
+   for(j=0; j<oh; j++){
+      memcpy(n[j], p[j], ow*szelem);
+   }
+   n2dfree(p, oh);
+   return n;
+
+}
+
 void** n2dcalloc(int h, int w, size_t szelem)
 {
 
