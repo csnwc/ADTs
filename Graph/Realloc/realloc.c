@@ -52,6 +52,7 @@ bool graph_free(graph* g)
 int graph_addVert(graph* g, char* label)
 {
 
+   int i, j;
    if(g==NULL){
       return NO_VERT;
    }
@@ -62,6 +63,13 @@ int graph_addVert(graph* g, char* label)
    if(g->size >= g->capacity){
       g->adjMat = (edge**) n2drecalloc((void**)g->adjMat, g->capacity, g->capacity*SCALEFACTOR, g->capacity, g->capacity*SCALEFACTOR, sizeof(edge));
       g->labels = (char**) n2drecalloc((void**)g->labels, g->capacity, g->capacity*SCALEFACTOR, MAXLABEL+1, MAXLABEL+1,  1);
+      for(j=0; j<g->capacity*SCALEFACTOR; j++){
+         for(i=0; i<g->capacity*SCALEFACTOR; i++){
+            if((i>=g->capacity)||(j>=g->capacity)){
+               g->adjMat[j][i] = INF;
+            }
+         }
+      }
       g->capacity = g->capacity*SCALEFACTOR;
    }
    strcpy(g->labels[g->size], label);
