@@ -44,6 +44,9 @@ int main(void)
    assert(graph_addVert(g, "G")==6);
    assert(graph_addVert(g, "H")==7);
    assert(graph_addVert(g, "I")==8);
+   assert(graph_addVert(g, "J")==9);
+   assert(graph_addEdge(g, 0, 8, 8));
+   assert(graph_addEdge(g, 0, 9, 9));
    
    graph_todot(g, "g.dot");
 
