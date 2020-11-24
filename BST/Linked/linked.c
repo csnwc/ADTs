@@ -87,7 +87,6 @@ void bst_todot(bst* b, char* fname)
    if(b==NULL){
       return;
    }
-   printf("Size:%d\n", (ELEMSIZE+NODELINE)*bst_size(b));
    str = ncalloc(1, (ELEMSIZE+NODELINE)*bst_size(b));
    sprintf(str, "digraph G {\n   node [shape=record, height=0.1];\n");
    _todot(b->top, str, NULL, 'X');
