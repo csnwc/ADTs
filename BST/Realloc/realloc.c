@@ -229,7 +229,7 @@ void _todot(bst* b, int c, char* nodes)
 {
    int p;
    char tmp[1000];
-   char fstr[1000];
+   char fstr[500];
    if(! _isvalid(b, c)){
       return;
    }
