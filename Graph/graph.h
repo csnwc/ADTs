@@ -1,4 +1,5 @@
 #include "../General/general.h"
+#include "../General/bool.h"
 #include "specific.h"
 
 #include <stdio.h>
@@ -7,8 +8,6 @@
 #include <assert.h>
 
 #define INF (INT_MAX)
-
-typedef enum bool {false, true} bool;
 
 /* Initialise an empty graph */
 graph* graph_init(void);

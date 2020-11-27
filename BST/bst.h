@@ -1,4 +1,6 @@
 #include "../General/general.h"
+#include "../General/bool.h"
+#include "../Queue/queue.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,6 +26,8 @@ bool bst_free(bst* b);
 /* Optional ? */
 
 char* bst_preorder(bst* b);
+
+void bst_printlevel(bst* b);
 
 /* Create string with tree as ((head)(left)(right)) */
 char* bst_printlisp(bst* b);

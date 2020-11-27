@@ -1,11 +1,10 @@
 #include "../General/general.h"
+#include "../General/bool.h"
 typedef struct coll coll;
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-
-typedef enum bool {false, true} bool;
 
 /* Create an empty coll */
 coll* coll_init(void);

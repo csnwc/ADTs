@@ -70,6 +70,25 @@ bool bst_free(bst* b)
    return true;
 }
 
+void bst_printlevel(bst* b)
+{
+   int n;
+   queue *q;
+
+   if((b==NULL) || (! _isvalid(b, 0))){
+      return;
+   }
+   /* Make a queue of cell indices */
+   q = queue_init();
+   queue_enqueue(q, 0);
+   while(queue_dequeue(q, &n) && _isvalid(b, n)){
+      printf(FORMATSTR, b->a[n].d);
+      putchar(' ');
+      queue_enqueue(q, _leftchild(n));
+      queue_enqueue(q, _rightchild(n));
+   }
+}
+
 char* bst_preorder(bst* b)
 {
    char* p;
@@ -80,34 +99,6 @@ char* bst_preorder(bst* b)
    return _preorder(b, 0);
 }
 
-char* _preorder(bst*b, int n)
-{
-   char tmp[ELEMSIZE];
-   char *s1, *s2, *p;
-   
-   if(! _isvalid(b, n)){
-      /*  \0 string */
-      p = ncalloc(1,1);
-      return p;
-   }
-   sprintf(tmp, FORMATSTR, b->a[n].d);
-   s1 = _preorder(b,  _leftchild(n));
-   s2 = _preorder(b, _rightchild(n));
-   p = ncalloc(strlen(s1)+strlen(s2)+strlen(tmp)+strlen("   "), 1);
-   strcpy(p, tmp);
-   if(strlen(s1)){
-      strcat(p, " ");
-      strcat(p, s1);
-   }
-   if(strlen(s2)){
-      strcat(p, " ");
-      strcat(p, s2);
-   }
-   free(s1);
-   free(s2);
-   return p;
-
-}
 
 char* bst_printlisp(bst* b)
 {
@@ -249,22 +240,7 @@ char* _printlisp(bst* b, int c)
    free(s2);
    return p;
 }
-/*
-digraph G {
 
-   node [shape=record, height=0.1];
-   node0 [label = "<l> | <m> H | <r>"];
-   node1 [label = "<l> | <m> D | <r>"];
-   node2 [label = "<l> | <m> A | <r>"];
-   node3 [label = "<l> | <m> P | <r>"];
-   node4 [label = "<l> | <m> W | <r>"];
-   node0:l -> node1:m;
-   node1:l -> node2:m;
-   node0:r -> node3:m;
-   node1:r -> node4:m;
-
-}
-*/
 void _todot(bst* b, int c, char* nodes)
 {
    int p;
@@ -284,5 +260,34 @@ void _todot(bst* b, int c, char* nodes)
    }
    _todot(b,  _leftchild(c), nodes);
    _todot(b, _rightchild(c), nodes);
+
+}
+
+char* _preorder(bst*b, int n)
+{
+   char tmp[ELEMSIZE];
+   char *s1, *s2, *p;
+   
+   if(! _isvalid(b, n)){
+      /*  \0 string */
+      p = ncalloc(1,1);
+      return p;
+   }
+   sprintf(tmp, FORMATSTR, b->a[n].d);
+   s1 = _preorder(b,  _leftchild(n));
+   s2 = _preorder(b, _rightchild(n));
+   p = ncalloc(strlen(s1)+strlen(s2)+strlen(tmp)+strlen("   "), 1);
+   strcpy(p, tmp);
+   if(strlen(s1)){
+      strcat(p, " ");
+      strcat(p, s1);
+   }
+   if(strlen(s2)){
+      strcat(p, " ");
+      strcat(p, s2);
+   }
+   free(s1);
+   free(s2);
+   return p;
 
 }

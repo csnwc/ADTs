@@ -1,12 +1,12 @@
 #include "../General/general.h"
+#include "../General/bool.h"
+
 typedef struct stack stack;
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-
-typedef enum bool {false, true} bool;
 
 /* Create an empty stack */
 stack* stack_init(void);

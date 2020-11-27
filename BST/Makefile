@@ -8,23 +8,23 @@ LDLIBS =
 
 all: testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v pdfs
 
-testrealloc : bst.h Realloc/specific.h Realloc/realloc.c testbst.c ../General/general.h ../General/general.c
-	$(CC) testbst.c Realloc/realloc.c ../General/general.c -o testrealloc -I./Realloc $(PRODUCTION) $(LDLIBS)
+testrealloc : bst.h Realloc/specific.h Realloc/realloc.c testbst.c ../General/general.h ../General/general.c ../Queue/Linked/linked.c
+	$(CC) testbst.c Realloc/realloc.c ../General/general.c ../Queue/Linked/linked.c -o testrealloc -I./Realloc $(PRODUCTION) $(LDLIBS)
 
-testlinked: bst.h Linked/specific.h Linked/linked.c testbst.c ../General/general.h ../General/general.c
-	$(CC) testbst.c Linked/linked.c ../General/general.c -o testlinked -I./Linked $(PRODUCTION) $(LDLIBS)
+testlinked: bst.h Linked/specific.h Linked/linked.c testbst.c ../General/general.h ../General/general.c ../Queue/Linked/linked.c
+	$(CC) testbst.c Linked/linked.c ../General/general.c ../Queue/Linked/linked.c -o testlinked -I./Linked $(PRODUCTION) $(LDLIBS)
 
-testrealloc_s : bst.h Realloc/specific.h Realloc/realloc.c testbst.c ../General/general.h ../General/general.c
-	$(CC) testbst.c Realloc/realloc.c ../General/general.c -o testrealloc_s -I./Realloc $(SANITIZE) $(LDLIBS)
+testrealloc_s : bst.h Realloc/specific.h Realloc/realloc.c testbst.c ../General/general.h ../General/general.c ../Queue/Linked/linked.c
+	$(CC) testbst.c Realloc/realloc.c ../General/general.c ../Queue/Linked/linked.c -o testrealloc_s -I./Realloc $(SANITIZE) $(LDLIBS)
 
-testlinked_s: bst.h Linked/specific.h Linked/linked.c testbst.c ../General/general.h ../General/general.c
-	$(CC) testbst.c Linked/linked.c ../General/general.c -o testlinked_s -I./Linked $(SANITIZE) $(LDLIBS)
+testlinked_s: bst.h Linked/specific.h Linked/linked.c testbst.c ../General/general.h ../General/general.c ../Queue/Linked/linked.c
+	$(CC) testbst.c Linked/linked.c ../General/general.c ../Queue/Linked/linked.c -o testlinked_s -I./Linked $(SANITIZE) $(LDLIBS)
 
-testrealloc_v : bst.h Realloc/specific.h Realloc/realloc.c testbst.c ../General/general.h ../General/general.c
-	$(CC) testbst.c Realloc/realloc.c ../General/general.c -o testrealloc_v -I./Realloc $(VALGRIND) $(LDLIBS)
+testrealloc_v : bst.h Realloc/specific.h Realloc/realloc.c testbst.c ../General/general.h ../General/general.c ../Queue/Linked/linked.c
+	$(CC) testbst.c Realloc/realloc.c ../General/general.c ../Queue/Linked/linked.c -o testrealloc_v -I./Realloc $(VALGRIND) $(LDLIBS)
 
-testlinked_v: bst.h Linked/specific.h Linked/linked.c testbst.c ../General/general.h ../General/general.c
-	$(CC) testbst.c Linked/linked.c ../General/general.c -o testlinked_v -I./Linked $(VALGRIND) $(LDLIBS)
+testlinked_v: bst.h Linked/specific.h Linked/linked.c testbst.c ../General/general.h ../General/general.c ../Queue/Linked/linked.c
+	$(CC) testbst.c Linked/linked.c ../General/general.c ../Queue/Linked/linked.c -o testlinked_v -I./Linked $(VALGRIND) $(LDLIBS)
 
 
 clean:

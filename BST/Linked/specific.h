@@ -1,6 +1,5 @@
+#include "../../General/bool.h"
 #include <string.h>
-
-typedef enum bool {false, true} bool;
 
 typedef int datatype;
 #define FORMATSTR "%d"

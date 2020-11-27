@@ -1,3 +1,4 @@
+#include "../../General/bool.h"
 typedef int datatype;
 #define FORMATSTR "%d"
 #define ELEMSIZE 20
@@ -6,8 +7,6 @@ typedef int datatype;
 /* Probably (2^n) -1 */
 #define INITSIZE 31
 #define SCALEFACTOR 2
-
-typedef enum bool {false, true} bool;
 
 struct dataframe {
    datatype d;

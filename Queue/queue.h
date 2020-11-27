@@ -1,12 +1,11 @@
 #include "../General/general.h"
+#include "../General/bool.h"
 typedef struct queue queue;
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-
-typedef enum bool {false, true} bool;
 
 /* Create an empty queue */
 queue* queue_init(void);
