@@ -42,6 +42,10 @@ int main(void)
    str = bst_preorder(b);
    assert(strcmp(str, "50 25 20 19 21 30 29 31 75 70 69 71 80 79 81")==0); free(str);
 
+   /* Only implemented for the Realloc version, currently */
+   /* Too tricky to store pointers via the basic Queue ADT */
+   /* bst_printlevel(b); */
+
    assert(bst_free(b));
    printf("END\n");
    return 0;

@@ -72,7 +72,7 @@ bool bst_free(bst* b)
 
 void bst_printlevel(bst* b)
 {
-   int n;
+   datatype n;
    queue *q;
 
    if((b==NULL) || (! _isvalid(b, 0))){
@@ -81,11 +81,11 @@ void bst_printlevel(bst* b)
    /* Make a queue of cell indices */
    q = queue_init();
    queue_enqueue(q, 0);
-   while(queue_dequeue(q, &n) && _isvalid(b, n)){
+   while(queue_dequeue(q, &n) && _isvalid(b, (int)n)){
       printf(FORMATSTR, b->a[n].d);
       putchar(' ');
-      queue_enqueue(q, _leftchild(n));
-      queue_enqueue(q, _rightchild(n));
+      queue_enqueue(q, _leftchild((int)n));
+      queue_enqueue(q, _rightchild((int)n));
    }
 }
 
