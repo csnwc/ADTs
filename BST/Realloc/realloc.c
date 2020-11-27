@@ -14,6 +14,7 @@ void _write(bst* b, datatype d, int c);
 bool _isvalid(bst* b, int c);
 char* _printlisp(bst* b, int c);
 void _todot(bst* b, int c, char* nodes);
+char* _preorder(bst*b, int n);
 
 bst* bst_init(void)
 {
@@ -67,6 +68,45 @@ bool bst_free(bst* b)
    free(b->a);
    free(b);
    return true;
+}
+
+char* bst_preorder(bst* b)
+{
+   char* p;
+   if(b==NULL){
+      p = ncalloc(1,1);
+      return p;
+   }
+   return _preorder(b, 0);
+}
+
+char* _preorder(bst*b, int n)
+{
+   char tmp[ELEMSIZE];
+   char *s1, *s2, *p;
+   
+   if(! _isvalid(b, n)){
+      /*  \0 string */
+      p = ncalloc(1,1);
+      return p;
+   }
+   sprintf(tmp, FORMATSTR, b->a[n].d);
+   s1 = _preorder(b,  _leftchild(n));
+   s2 = _preorder(b, _rightchild(n));
+   p = ncalloc(strlen(s1)+strlen(s2)+strlen(tmp)+strlen("   "), 1);
+   strcpy(p, tmp);
+   if(strlen(s1)){
+      strcat(p, " ");
+      strcat(p, s1);
+   }
+   if(strlen(s2)){
+      strcat(p, " ");
+      strcat(p, s2);
+   }
+   free(s1);
+   free(s2);
+   return p;
+
 }
 
 char* bst_printlisp(bst* b)

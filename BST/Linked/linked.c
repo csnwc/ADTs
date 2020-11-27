@@ -9,6 +9,7 @@ bool _isin(dataframe* t, datatype d);
 int _size(dataframe* b);
 char* _printlisp(dataframe* t);
 void _todot(dataframe* t, char* nodes, dataframe* parent, char plr);
+char* _preorder(dataframe *t);
 
 bst* bst_init(void)
 {
@@ -35,6 +36,46 @@ bool bst_insert(bst* b, datatype d)
    }
    _insert(b->top, d);
    return true;
+}
+
+char* bst_preorder(bst* b)
+{
+   char* str;
+   if(b==NULL){ 
+      /* \0 String */
+      str = ncalloc(1,1);
+      str[0] = '\0';
+      return str;
+   }
+   return _preorder(b->top);
+}
+
+char* _preorder(dataframe *t)
+{
+   char tmp[ELEMSIZE];
+   char *s1, *s2, *p;
+   
+   if(t==NULL){
+      /*  \0 string */
+      p = ncalloc(1,1);
+      return p;
+   }
+   sprintf(tmp, FORMATSTR, t->d);
+   s1 = _preorder(t->left);
+   s2 = _preorder(t->right);
+   p = ncalloc(strlen(s1)+strlen(s2)+strlen(tmp)+strlen("   "), 1);
+   strcpy(p, tmp);
+   if(strlen(s1)){
+      strcat(p, " ");
+      strcat(p, s1);
+   }
+   free(s1);
+   if(strlen(s2)){
+      strcat(p, " ");
+      strcat(p, s2);
+   }
+   free(s2);
+   return p;
 }
 
 bool bst_isin(bst* b, datatype d)

@@ -31,12 +31,16 @@ int main(void)
    assert(bst_isin(b, 90));
    str = bst_printlisp(b);
    assert(strcmp(str, "50(10()())(90()())")==0); free(str);
+   str = bst_preorder(b);
+   assert(strcmp(str, "50 10 90")==0); free(str);
    assert(bst_free(b));
 
    b = bst_init();
    bst_insertarray(b, arr, ARRSIZE);
    assert(bst_size(b)==ARRSIZE);
    bst_todot(b, "b.dot");
+   str = bst_preorder(b);
+   assert(strcmp(str, "50 25 20 19 21 30 29 31 75 70 69 71 80 79 81")==0); free(str);
 
    assert(bst_free(b));
    printf("END\n");

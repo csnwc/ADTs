@@ -23,6 +23,8 @@ bool bst_free(bst* b);
 
 /* Optional ? */
 
+char* bst_preorder(bst* b);
+
 /* Create string with tree as ((head)(left)(right)) */
 char* bst_printlisp(bst* b);
 
