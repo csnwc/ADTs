@@ -1,9 +1,11 @@
 #include "../graph.h" 
 
+#define TMPSTR 1000
+
 edge graph_salesman(graph* g, int from, char* str)
 {
 
-   char tmp[1000];
+   char tmp[TMPSTR];
    bool* unvis;
    int v;
    int curr, ncurr, nvs;

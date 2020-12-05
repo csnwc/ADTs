@@ -134,7 +134,7 @@ char* graph_getLabel(graph* g, int v)
 void graph_tostring(graph* g, char* str)
 {
    int f, t;
-   char tmp[1000];
+   char tmp[TMPSTR];
    str[0] = '\0';
    if(g==NULL){
       return;

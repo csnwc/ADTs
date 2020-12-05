@@ -187,7 +187,7 @@ void graph_tostring(graph* g, char* str)
 {
    vertex* v;
    edgel* e;
-   char tmp[1000];
+   char tmp[TMPSTR];
    str[0] = '\0';
    if(g==NULL){
       return;
