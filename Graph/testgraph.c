@@ -1,10 +1,12 @@
 #include "graph.h"
 
+#define BIGSTR 1000
+
 int main(void)
 {
 
    graph* g;
-   char str[1000];
+   char str[BIGSTR];
 
    printf("Test Graph (%s) Start ... ", GRAPHTYPE);
 
@@ -35,10 +37,10 @@ int main(void)
    assert(graph_addEdge(g, 2, 3, 23));
    assert(graph_getEdgeWeight(g, 2, 3)==23);
    assert(graph_numVerts(g)==4);
-   assert(graph_addEdge(g, 0, 3, 03));
-   assert(graph_getEdgeWeight(g, 0, 3)==3);
+   assert(graph_addEdge(g, 0, 3, 30));
+   assert(graph_getEdgeWeight(g, 0, 3)==30);
    graph_tostring(g, str);
-   assert(strcmp(str, "A B C D 0->1 1 0->3 3 1->2 12 2->0 20 2->3 23 ")==0);
+   assert(strcmp(str, "A B C D 0->1 1 0->3 30 1->2 12 2->0 20 2->3 23 ")==0);
    assert(graph_addVert(g, "E")==4);
    assert(graph_addVert(g, "F")==5);
    assert(graph_addVert(g, "G")==6);
@@ -47,6 +49,15 @@ int main(void)
    assert(graph_addVert(g, "J")==9);
    assert(graph_addEdge(g, 0, 8, 8));
    assert(graph_addEdge(g, 0, 9, 9));
+
+   /* Minimum Cost */
+   assert(graph_addEdge(g, 8, 3, 10));
+   assert(graph_addEdge(g, 9, 3, 10));
+   /* A -> I -> D */
+   assert(graph_dijkstra(g, 0, 3)==18);
+   assert(graph_dijkstra(g, 3, 0)==INF);
+   assert(graph_dijkstra(g, 2, 1)==21);
+   
    
    graph_todot(g, "g.dot");
 
