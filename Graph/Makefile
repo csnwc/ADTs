@@ -6,7 +6,7 @@ VALGRIND= $(COMMON) $(DEBUG)
 PRODUCTION= $(COMMON) -O3
 LDLIBS =
 
-all: testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v pdfs
+all: testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v
 
 testrealloc : graph.h Realloc/specific.h Realloc/realloc.c testgraph.c Indep/indep.c ../General/general.h ../General/general.c
 	$(CC) testgraph.c Realloc/realloc.c Indep/indep.c ../General/general.c -o testrealloc -I./Realloc $(PRODUCTION) $(LDLIBS)

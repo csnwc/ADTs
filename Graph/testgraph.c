@@ -71,7 +71,7 @@ int main(void)
    assert(graph_addEdge(g, 8, 4, 2));
    /* Total cost & then path */
    assert(graph_salesman(g, 0, str)==58);
-   assert(strcmp(str,"A B C D J I E F G ")==0);
+   assert(strcmp(str,"A B C D J I E F G")==0);
    
    
    graph_todot(g, "g.dot");

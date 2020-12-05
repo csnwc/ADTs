@@ -4,8 +4,6 @@
 
 edge graph_salesman(graph* g, int from, char* str)
 {
-
-   char tmp[TMPSTR];
    bool* unvis;
    int v;
    int curr, ncurr, nvs;
@@ -15,15 +13,13 @@ edge graph_salesman(graph* g, int from, char* str)
    if((g==NULL) || (from >= nvs) || (str==NULL)){
       return INF;
    }
-   str[0] = '\0';
    unvis = (bool*)ncalloc(nvs, sizeof(bool));
    for(v=0; v<nvs; v++){
       unvis[v] = true;
    }
    curr = from;
    bcst = 0;
-   sprintf(tmp, "%s ", graph_getLabel(g, from));
-   strcat(str, tmp);
+   strcpy(str, graph_getLabel(g, from));
    do{
       unvis[curr] = false;
       cst = INF;
@@ -42,8 +38,8 @@ edge graph_salesman(graph* g, int from, char* str)
       if(cst < INF){
          bcst += cst;
          curr = ncurr;
-         sprintf(tmp, "%s ", graph_getLabel(g, curr));
-         strcat(str, tmp);
+         strcat(str, " ");
+         strcat(str, graph_getLabel(g, ncurr));
       }
    }while((cst < INF) && (curr != NO_VERT));
    free(unvis);
