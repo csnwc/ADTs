@@ -49,60 +49,6 @@ bool graph_free(graph* g)
    return true;
 }
 
-edge graph_dijkstra(graph* g, int from, int to)
-{
-
-   bool* unvis;
-   edge* dist;
-   edge e, cst;
-   int v;
-   int curr;
-
-   if((g==NULL) || (from >= g->size) || (to >= g->size)){
-      return INF;
-   }
-   unvis = (bool*)ncalloc(g->size, sizeof(bool));
-   dist  = (edge*)ncalloc(g->size, sizeof(edge));
-   for(v=0; v<g->size; v++){
-      unvis[v] = true;
-      dist[v] = INF;
-   }
-   dist[from] = 0; 
-   curr = from;
-   do{
-      /* Look at neighbours of curr */
-      unvis[curr] = false;
-      for(v=0; v<g->size; v++){
-         e = graph_getEdgeWeight(g, curr, v);
-         if((v!=curr) && unvis[v] && (e!=INF)){
-            cst = dist[curr] + e;
-            if(cst < dist[v]){
-               dist[v] = cst;
-            }
-         }
-      }
-      /* Have we found the answer */
-      if(!unvis[to]){
-          e = dist[to];
-          free(dist); free(unvis);
-         return e;
-      }
-      curr = -1;
-      e = INF;
-      /* Best unvisited node */
-      for(v=0; v<g->size; v++){
-         if(unvis[v] && (dist[v] < e)){
-            curr = v;
-            e = dist[v];
-         }
-      }
-   }while(curr >= 0);
-   /* No route */
-   free(dist); free(unvis);
-   return INF;
-
-}
-
 int graph_addVert(graph* g, char* label)
 {
 
@@ -175,6 +121,14 @@ int graph_getVertNum(graph* g, char* label)
    }
    return NO_VERT;
 
+}
+
+char* graph_getLabel(graph* g, int v)
+{
+   if((g==NULL) || (v >= graph_numVerts(g))){
+      return NULL;
+   }
+   return g->labels[v];
 }
 
 void graph_tostring(graph* g, char* str)

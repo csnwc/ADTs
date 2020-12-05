@@ -22,11 +22,16 @@ bool graph_addEdge(graph* g,  int from, int to, edge weight);
    else 0 ... (size-1)                   */
 int graph_getVertNum(graph* g, char* label);
 
+/* Returns label of vertex v */
+char* graph_getLabel(graph* g, int v);
+
 /* Returns edge weight - if none = INF */
 edge graph_getEdgeWeight(graph* g, int from, int to);
 
 /* Min Distance between two nodes */
 edge graph_dijkstra(graph* g, int from, int to);
+/* Greedy Travelling Salesman */
+edge graph_salesman(graph* g, int from, char* str);
 
 /* Number of verts */
 int graph_numVerts(graph* b);

@@ -8,65 +8,33 @@ LDLIBS =
 
 all: testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v pdfs
 
-testrealloc : graph.h Realloc/specific.h Realloc/realloc.c testgraph.c ../General/general.h ../General/general.c
-	$(CC) testgraph.c Realloc/realloc.c ../General/general.c -o testrealloc -I./Realloc $(PRODUCTION) $(LDLIBS)
+testrealloc : graph.h Realloc/specific.h Realloc/realloc.c testgraph.c indep.c ../General/general.h ../General/general.c indep.c
+	$(CC) testgraph.c Realloc/realloc.c indep.c ../General/general.c -o testrealloc -I./Realloc $(PRODUCTION) $(LDLIBS)
 
-testlinked: graph.h Linked/specific.h Linked/linked.c testgraph.c ../General/general.h ../General/general.c
-	$(CC) testgraph.c Linked/linked.c ../General/general.c -o testlinked -I./Linked $(PRODUCTION) $(LDLIBS)
+testlinked: graph.h Linked/specific.h Linked/linked.c testgraph.c indep.c ../General/general.h ../General/general.c indep.c
+	$(CC) testgraph.c Linked/linked.c indep.c ../General/general.c -o testlinked -I./Linked $(PRODUCTION) $(LDLIBS)
 
-testrealloc_s : graph.h Realloc/specific.h Realloc/realloc.c testgraph.c ../General/general.h ../General/general.c
-	$(CC) testgraph.c Realloc/realloc.c ../General/general.c -o testrealloc_s -I./Realloc $(SANITIZE) $(LDLIBS)
+testrealloc_s : graph.h Realloc/specific.h Realloc/realloc.c testgraph.c indep.c ../General/general.h ../General/general.c indep.c
+	$(CC) testgraph.c Realloc/realloc.c indep.c ../General/general.c -o testrealloc_s -I./Realloc $(SANITIZE) $(LDLIBS)
 
-testlinked_s: graph.h Linked/specific.h Linked/linked.c testgraph.c ../General/general.h ../General/general.c
-	$(CC) testgraph.c Linked/linked.c ../General/general.c -o testlinked_s -I./Linked $(SANITIZE) $(LDLIBS)
+testlinked_s: graph.h Linked/specific.h Linked/linked.c testgraph.c indep.c ../General/general.h ../General/general.c indep.c
+	$(CC) testgraph.c Linked/linked.c indep.c ../General/general.c -o testlinked_s -I./Linked $(SANITIZE) $(LDLIBS)
 
-testrealloc_v : graph.h Realloc/specific.h Realloc/realloc.c testgraph.c ../General/general.h ../General/general.c
-	$(CC) testgraph.c Realloc/realloc.c ../General/general.c -o testrealloc_v -I./Realloc $(VALGRIND) $(LDLIBS)
+testrealloc_v : graph.h Realloc/specific.h Realloc/realloc.c testgraph.c indep.c ../General/general.h ../General/general.c indep.c
+	$(CC) testgraph.c Realloc/realloc.c indep.c ../General/general.c -o testrealloc_v -I./Realloc $(VALGRIND) $(LDLIBS)
 
-testlinked_v: graph.h Linked/specific.h Linked/linked.c testgraph.c ../General/general.h ../General/general.c
-	$(CC) testgraph.c Linked/linked.c ../General/general.c -o testlinked_v -I./Linked $(VALGRIND) $(LDLIBS)
+testlinked_v: graph.h Linked/specific.h Linked/linked.c testgraph.c indep.c ../General/general.h ../General/general.c indep.c
+	$(CC) testgraph.c Linked/linked.c indep.c ../General/general.c -o testlinked_v -I./Linked $(VALGRIND) $(LDLIBS)
 
 
 clean:
-	rm -f testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v Linkedg.dot Linkedg.pdf Reallocg.dot Reallocg.pdf 
+	rm -f testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v Linkedg.dot Linkedg.pdf Reallocg.dot Reallocg.pdf
 
 run: testrealloc_s testrealloc_v testlinked_s testlinked_v pdfs
 	./testrealloc_s
 	valgrind ./testrealloc_v
 	./testlinked_s
 	valgrind ./testlinked_v
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 DOT := $(shell command -v dot 2> /dev/null)
 
