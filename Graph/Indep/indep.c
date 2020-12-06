@@ -49,13 +49,11 @@ edge graph_salesman(graph* g, int from, char* str)
 /* Not efficient : Use a min heap instead */
 edge graph_dijkstra(graph* g, int from, int to)
 {
-
    bool* unvis;
    edge* dist;
    edge e, cst;
    int v, curr, nvs;
    
-
    nvs = graph_numVerts(g);
    if((g==NULL) || (from >= nvs) 
       || (to >= nvs)){
@@ -83,8 +81,8 @@ edge graph_dijkstra(graph* g, int from, int to)
       }
       /* Have we found the answer */
       if(!unvis[to]){
-          e = dist[to];
-          free(dist); free(unvis);
+         e = dist[to];
+         free(dist); free(unvis);
          return e;
       }
       curr = -1;
