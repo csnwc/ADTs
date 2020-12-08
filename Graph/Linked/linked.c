@@ -39,17 +39,10 @@ edge graph_getEdgeWeight(graph* g, int from, int to)
 
 int graph_numVerts(graph* g)
 {
-   vertex* v;
-   int cnt = 0;
-   if(g==NULL){
-      return 0;
-   }
-   v = g->firstv;
-   while(v != NULL){
-      cnt++;
-      v = v->nextv;
-   }
-   return cnt;
+    if(g==NULL||(g->endv==NULL)) {
+        return 0;
+    }
+    return g->endv->num+1;
 }
 
 bool graph_free(graph* g)
