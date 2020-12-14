@@ -1,5 +1,5 @@
-#include "specific.h"
 #include "../stack.h"
+#include "specific.h"
 
 #define DOTFILE 5000
 

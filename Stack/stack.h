@@ -1,6 +1,8 @@
 #include "../General/general.h"
 #include "../General/bool.h"
 
+typedef int stacktype;
+
 typedef struct stack stack;
 
 #include <stdio.h>

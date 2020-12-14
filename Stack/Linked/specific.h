@@ -1,4 +1,3 @@
-typedef int stacktype;
 #define FORMATSTR "%d"
 #define ELEMSIZE 20
 #define STACKTYPE "Linked"

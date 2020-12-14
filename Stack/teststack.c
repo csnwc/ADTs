@@ -1,5 +1,5 @@
-#include "specific.h"
 #include "stack.h"
+#include "specific.h"
 
 int main(void)
 {
