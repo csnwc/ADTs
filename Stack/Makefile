@@ -6,7 +6,7 @@ VALGRIND= $(COMMON) $(DEBUG)
 PRODUCTION= $(COMMON) -O3
 LDLIBS =
 
-all: testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v revstr_realloc revstr_linked pdfs
+all: testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v revstr_realloc revstr_linked pdfs postfix_linked postfix_realloc
 
 testrealloc : stack.h Realloc/specific.h Realloc/realloc.c teststack.c ../General/general.h ../General/general.c
 	$(CC) teststack.c Realloc/realloc.c ../General/general.c -o testrealloc -I./Realloc $(PRODUCTION) $(LDLIBS)
@@ -34,16 +34,24 @@ revstr_linked : revstr.c stack.h Linked/specific.h Linked/linked.c ../General/ge
 revstr_realloc : revstr.c stack.h Realloc/specific.h Realloc/realloc.c ../General/general.h ../General/general.c
 	$(CC) revstr.c Realloc/realloc.c ../General/general.c -o revstr_realloc -I./Realloc $(SANITIZE) $(LDLIBS)
 
+postfix_linked : postfix.c stack.h Linked/specific.h Linked/linked.c ../General/general.h ../General/general.c
+	$(CC) postfix.c Linked/linked.c ../General/general.c -o postfix_linked -I./Linked $(SANITIZE) $(LDLIBS)
+
+postfix_realloc : postfix.c stack.h Realloc/specific.h Realloc/realloc.c ../General/general.h ../General/general.c
+	$(CC) postfix.c Realloc/realloc.c ../General/general.c -o postfix_realloc -I./Realloc $(SANITIZE) $(LDLIBS)
+
 
 
 clean:
-	rm -f testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v Linkeds.dot Linkeds.pdf Reallocs.dot Reallocs.pdf revstr_realloc revstr_linked
+	rm -f testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v Linkeds.dot Linkeds.pdf Reallocs.dot Reallocs.pdf revstr_realloc revstr_linked postfix_linked postfix_realloc
 
 run: all
 	./testrealloc_s
 	./testlinked_s
 	valgrind ./testrealloc_v
 	valgrind ./testlinked_v
+	echo "7\n4\n+\n4\n*\n16\n+\n6\n4\n+\n2\n+\n/" | ./postfix_linked
+	echo "7\n4\n+\n4\n*\n16\n+\n6\n4\n+\n2\n+\n/" | ./postfix_realloc
 
 
 
