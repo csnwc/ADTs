@@ -51,7 +51,7 @@ run: all
 	valgrind ./testrealloc_v
 	valgrind ./testlinked_v
 	echo "7\n4\n+\n4\n*\n16\n+\n6\n4\n+\n2\n+\n/" | ./postfix_linked
-	echo "7\n4\n+\n4\n*\n16\n+\n6\n4\n+\n2\n+\n/" | ./postfix_realloc
+	echo "8\n2\n5\n*\n+\n1\n3\n2\n*\n+\n4\n-\n/" | ./postfix_realloc
 
 
 
