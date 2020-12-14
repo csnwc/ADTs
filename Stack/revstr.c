@@ -7,7 +7,7 @@ int main(void)
    char str[100];
    unsigned int i;
    stack* s;
-   datatype d;
+   stacktype d;
 
    strcpy(str, "A man, a plan, a cat, a canal – Panama!");
 

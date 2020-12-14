@@ -1,10 +1,10 @@
-typedef int datatype;
+typedef int stacktype;
 #define FORMATSTR "%d"
 #define ELEMSIZE 20
 #define STACKTYPE "Linked"
 
 struct dataframe {
-   datatype i;
+   stacktype i;
    struct dataframe* next;
 };
 typedef struct dataframe dataframe;

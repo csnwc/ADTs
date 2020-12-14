@@ -1,4 +1,4 @@
-typedef int datatype;
+typedef int stacktype;
 #define FORMATSTR "%d"
 #define ELEMSIZE 20
 
@@ -9,7 +9,7 @@ typedef int datatype;
 
 struct stack {
    /* Underlying array */
-   datatype* a;
+   stacktype* a;
    int size;
    int capacity;
 };

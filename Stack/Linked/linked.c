@@ -9,7 +9,7 @@ stack* stack_init(void)
    return s;
 }
 
-void stack_push(stack* s, datatype d)
+void stack_push(stack* s, stacktype d)
 {
    dataframe* f;
    if(s){
@@ -22,7 +22,7 @@ void stack_push(stack* s, datatype d)
       
 }
 
-bool stack_pop(stack* s, datatype* d)
+bool stack_pop(stack* s, stacktype* d)
 {
    dataframe* f;
    if((s==NULL) || (s->start==NULL)){
@@ -37,7 +37,7 @@ bool stack_pop(stack* s, datatype* d)
    return true;
 }
 
-bool stack_peek(stack* s, datatype* d)
+bool stack_peek(stack* s, stacktype* d)
 {
    if((s==NULL) || (s->start==NULL)){
       return false;

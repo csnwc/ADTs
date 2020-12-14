@@ -3,7 +3,7 @@
 
 int main(void)
 {
-   datatype d;
+   stacktype d;
    char str[1000];
    int i;
    stack* s;
