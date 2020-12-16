@@ -45,15 +45,16 @@ postfix_realloc : postfix.c stack.h Realloc/specific.h Realloc/realloc.c ../Gene
 clean:
 	rm -f testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v Linkeds.dot Linkeds.pdf Reallocs.dot Reallocs.pdf revstr_realloc revstr_linked postfix_linked postfix_realloc
 
-run: all
+run: all pfix
 	./testrealloc_s
 	./testlinked_s
 	valgrind ./testrealloc_v
 	valgrind ./testlinked_v
+        
+
+pfix:
 	echo "7\n4\n+\n4\n*\n16\n+\n6\n4\n+\n2\n+\n/" | ./postfix_linked
 	echo "8\n2\n5\n*\n+\n1\n3\n2\n*\n+\n4\n-\n/" | ./postfix_realloc
-
-
 
 
 
