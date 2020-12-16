@@ -6,7 +6,7 @@ VALGRIND= $(COMMON) $(DEBUG)
 PRODUCTION= $(COMMON) -O3
 LDLIBS =
 
-all: testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v revstr_realloc revstr_linked pdfs postfix_linked postfix_realloc
+all: testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v revstr_realloc revstr_linked pdfs buildpostfix
 
 testrealloc : stack.h Realloc/specific.h Realloc/realloc.c teststack.c ../General/general.h ../General/general.c
 	$(CC) teststack.c Realloc/realloc.c ../General/general.c -o testrealloc -I./Realloc $(PRODUCTION) $(LDLIBS)
@@ -41,18 +41,19 @@ postfix_realloc : postfix.c stack.h Realloc/specific.h Realloc/realloc.c ../Gene
 	$(CC) postfix.c Realloc/realloc.c ../General/general.c -o postfix_realloc -I./Realloc $(SANITIZE) $(LDLIBS)
 
 
+buildpostfix: postfix_linked postfix_realloc
 
 clean:
 	rm -f testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v Linkeds.dot Linkeds.pdf Reallocs.dot Reallocs.pdf revstr_realloc revstr_linked postfix_linked postfix_realloc
 
-run: all pfix
+run: all buildpostfixrun
 	./testrealloc_s
 	./testlinked_s
 	valgrind ./testrealloc_v
 	valgrind ./testlinked_v
         
 
-pfix:
+postfixrun: buildpostfix
 	echo "7\n4\n+\n4\n*\n16\n+\n6\n4\n+\n2\n+\n/" | ./postfix_linked
 	echo "8\n2\n5\n*\n+\n1\n3\n2\n*\n+\n4\n-\n/" | ./postfix_realloc
 
