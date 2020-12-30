@@ -1,10 +1,10 @@
-#include "specific.h"
 #include "../coll.h"
+#include "specific.h"
 
 coll* coll_init(void)
 {
    coll *c = (coll*) ncalloc(sizeof(coll), 1);
-   c->a = (datatype*) ncalloc(sizeof(datatype), FIXEDSIZE);
+   c->a = (colltype*) ncalloc(sizeof(colltype), FIXEDSIZE);
    c->size = 0;
    c->capacity= FIXEDSIZE;
    return c;
@@ -18,7 +18,7 @@ int coll_size(coll* c)
    return c->size;
 }
 
-bool coll_isin(coll* c, datatype d)
+bool coll_isin(coll* c, colltype d)
 {
    int i;
    for(i=0; i<coll_size(c); i++){
@@ -29,19 +29,19 @@ bool coll_isin(coll* c, datatype d)
    return false;
 }
 
-void coll_add(coll* c, datatype d)
+void coll_add(coll* c, colltype d)
 {
    if(c){
       c->a[c->size] = d;
       c->size = c->size + 1;
       if(c->size >= c->capacity){
-         c->a = (datatype*) nremalloc(c->a, sizeof(datatype)*c->capacity*SCALEFACTOR);
+         c->a = (colltype*) nremalloc(c->a, sizeof(colltype)*c->capacity*SCALEFACTOR);
          c->capacity = c->capacity*SCALEFACTOR;
       }
    }
 }
 
-bool coll_remove(coll* c, datatype d)
+bool coll_remove(coll* c, colltype d)
 {
    int i,j;
    bool found = false;

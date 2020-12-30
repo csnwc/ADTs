@@ -1,9 +1,9 @@
-typedef int datatype;
+#pragma once
 
 #define COLLTYPE "Linked"
 
 struct dataframe {
-   datatype i;
+   colltype i;
    struct dataframe* next;
 };
 typedef struct dataframe dataframe;

@@ -1,5 +1,8 @@
 #include "../General/general.h"
 #include "../General/bool.h"
+
+typedef int colltype;
+
 typedef struct coll coll;
 
 #include <stdio.h>
@@ -9,11 +12,11 @@ typedef struct coll coll;
 /* Create an empty coll */
 coll* coll_init(void);
 /* Add element onto top */
-void coll_add(coll* c, datatype i);
+void coll_add(coll* c, colltype i);
 /* Take element out */
-bool coll_remove(coll* c, datatype d);
+bool coll_remove(coll* c, colltype d);
 /* Does this exist ? */
-bool coll_isin(coll* c, datatype i);
+bool coll_isin(coll* c, colltype i);
 /* Return size of coll */
 int coll_size(coll* c);
 /* Clears all space used */

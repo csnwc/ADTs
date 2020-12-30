@@ -1,5 +1,5 @@
-#include "specific.h"
 #include "../coll.h"
+#include "specific.h"
 
 coll* coll_init(void)
 {
@@ -16,7 +16,7 @@ int coll_size(coll* c)
    return c->size;
 }
 
-bool coll_isin(coll* c, datatype d)
+bool coll_isin(coll* c, colltype  d)
 {
    int i;
    for(i=0; i<coll_size(c); i++){
@@ -27,7 +27,7 @@ bool coll_isin(coll* c, datatype d)
    return false;
 }
 
-void coll_add(coll* c, datatype d)
+void coll_add(coll* c, colltype  d)
 {
    if(c){
       c->a[c->size] = d;
@@ -38,7 +38,7 @@ void coll_add(coll* c, datatype d)
    }
 }
 
-bool coll_remove(coll* c, datatype d)
+bool coll_remove(coll* c, colltype d)
 {
    int i,j;
    for(i=0; i<coll_size(c); i++){

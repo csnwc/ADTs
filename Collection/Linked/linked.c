@@ -1,5 +1,5 @@
-#include "specific.h"
 #include "../coll.h"
+#include "specific.h"
 
 coll* coll_init(void)
 {
@@ -15,7 +15,7 @@ int coll_size(coll* c)
    return c->size;
 }
 
-bool coll_isin(coll* c, datatype d)
+bool coll_isin(coll* c, colltype d)
 {
    dataframe* f;
    if(c == NULL || c->start==NULL){
@@ -31,7 +31,7 @@ bool coll_isin(coll* c, datatype d)
    return false;
 }
 
-void coll_add(coll* c, datatype d)
+void coll_add(coll* c, colltype d)
 {
    dataframe* f;
    if(c){
@@ -44,7 +44,7 @@ void coll_add(coll* c, datatype d)
       
 }
 
-bool coll_remove(coll* c, datatype d)
+bool coll_remove(coll* c, colltype d)
 {
    dataframe* f1, *f2;
    if((c==NULL) || (c->start==NULL)){

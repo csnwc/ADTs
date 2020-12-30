@@ -1,10 +1,10 @@
-typedef int datatype;
+#pragma once
 
 #define COLLTYPE "Fixed"
 
 #define FIXEDSIZE 5000
 struct coll {
    /* Underlying array */
-   datatype a[FIXEDSIZE];
+   colltype a[FIXEDSIZE];
    int size;
 };

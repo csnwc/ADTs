@@ -1,4 +1,4 @@
-typedef int datatype;
+#pragma once
 
 #define COLLTYPE "Realloc"
 
@@ -6,7 +6,7 @@ typedef int datatype;
 #define SCALEFACTOR 2
 struct coll {
    /* Underlying array */
-   datatype* a;
+   colltype* a;
    int size;
    int capacity;
 };
