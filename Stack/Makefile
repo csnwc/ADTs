@@ -46,7 +46,7 @@ buildpostfix: postfix_linked postfix_realloc
 clean:
 	rm -f testrealloc_s testrealloc_v testrealloc testlinked testlinked_s testlinked_v Linkeds.dot Linkeds.pdf Reallocs.dot Reallocs.pdf revstr_realloc revstr_linked postfix_linked postfix_realloc
 
-run: all buildpostfixrun
+run: all buildpostfix
 	./testrealloc_s
 	./testlinked_s
 	valgrind ./testrealloc_v

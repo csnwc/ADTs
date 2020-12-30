@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../General/general.h"
 #include "../General/bool.h"
 
