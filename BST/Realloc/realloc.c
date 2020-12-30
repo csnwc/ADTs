@@ -4,13 +4,13 @@
 #define NODELINE 30
 
 void _freeframes(dataframe* frame);
-bool _insert(bst* b, datatype d, int c);
-bool _isin(bst* b, datatype d, int c);
+bool _insert(bst* b, treetype d, int c);
+bool _isin(bst* b, treetype d, int c);
 int _size(bst* b, int c);
 int _leftchild(int c);
 int _rightchild(int c);
 int _parent(int c);
-void _write(bst* b, datatype d, int c);
+void _write(bst* b, treetype d, int c);
 bool _isvalid(bst* b, int c);
 char* _printlisp(bst* b, int c);
 void _todot(bst* b, int c, char* nodes);
@@ -32,7 +32,7 @@ int bst_size(bst* b)
    return _size(b, 0);
 }
 
-bool bst_insert(bst* b, datatype d)
+bool bst_insert(bst* b, treetype d)
 {
    if(b==NULL){
       return false;
@@ -40,7 +40,7 @@ bool bst_insert(bst* b, datatype d)
    return _insert(b, d, 0);
 }
 
-bool bst_isin(bst* b, datatype d)
+bool bst_isin(bst* b, treetype d)
 {
    if(b==NULL){
       return false;
@@ -48,7 +48,7 @@ bool bst_isin(bst* b, datatype d)
    return _isin(b, d, 0);
 }
 
-bool bst_insertarray(bst* b, datatype* a, int n)
+bool bst_insertarray(bst* b, treetype* a, int n)
 {
    int i;
    if((b==NULL) || (a==NULL) || (n<=0)){
@@ -72,7 +72,7 @@ bool bst_free(bst* b)
 
 void bst_printlevel(bst* b)
 {
-   datatype n;
+   treetype n;
    queue *q;
 
    if((b==NULL) || (! _isvalid(b, 0))){
@@ -139,9 +139,9 @@ void bst_todot(bst* b, char* fname)
 /******************************************************************/
 
 /* Based on geekforgeeks.org */
-bool _insert(bst* b, datatype d, int c)
+bool _insert(bst* b, treetype d, int c)
 {
-    datatype i;
+    treetype i;
     if (!_isvalid(b, c)){
        _write(b, d, c);
        return true;
@@ -158,9 +158,9 @@ bool _insert(bst* b, datatype d, int c)
     return true;
 }
 
-bool _isin(bst* b, datatype d, int c)
+bool _isin(bst* b, treetype d, int c)
 {
-   datatype i;
+   treetype i;
    if (!_isvalid(b, c)){
       return false;
    }
@@ -200,7 +200,7 @@ int _parent(int c)
    return (c+1)/2 - 1;
 }
 
-void _write(bst* b, datatype d, int c)
+void _write(bst* b, treetype d, int c)
 {
    int newsz;
    /* Resize, but how much ? */

@@ -1,5 +1,10 @@
+#pragma once 
+
 #include "../General/general.h"
 #include "../General/bool.h"
+
+typedef int queuetype;
+
 typedef struct queue queue;
 
 #include <stdio.h>

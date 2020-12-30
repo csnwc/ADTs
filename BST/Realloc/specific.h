@@ -1,5 +1,5 @@
 #include "../../General/bool.h"
-typedef int datatype;
+typedef int treetype;
 #define FORMATSTR "%d"
 #define ELEMSIZE 20
 #define BSTTYPE "Realloc"
@@ -9,7 +9,7 @@ typedef int datatype;
 #define SCALEFACTOR 2
 
 struct dataframe {
-   datatype d;
+   treetype d;
    bool isvalid;
 };
 typedef struct dataframe dataframe;

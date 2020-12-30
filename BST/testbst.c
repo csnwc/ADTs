@@ -8,7 +8,7 @@ int main(void)
 
    bst* b;
    char* str;
-   datatype arr[ARRSIZE] = {50, 75, 25, 20, 30, 70, 80, 19, 21, 29, 31, 69, 71, 79, 81};
+   treetype arr[ARRSIZE] = {50, 75, 25, 20, 30, 70, 80, 19, 21, 29, 31, 69, 71, 79, 81};
 
    printf("Test BST (%s) Start ... ", BSTTYPE);
 

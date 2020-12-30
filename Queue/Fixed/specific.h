@@ -1,4 +1,5 @@
-typedef int queuetype;
+#pragma once
+
 #define FORMATSTR "%d"
 #define ELEMSIZE 20
 

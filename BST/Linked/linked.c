@@ -4,8 +4,8 @@
 #define NODELINE 100
 
 void _freeframes(dataframe* frame);
-dataframe* _insert(dataframe* t, datatype d);
-bool _isin(dataframe* t, datatype d);
+dataframe* _insert(dataframe* t, treetype d);
+bool _isin(dataframe* t, treetype d);
 int _size(dataframe* b);
 char* _printlisp(dataframe* t);
 void _todot(dataframe* t, char* nodes, dataframe* parent, char plr);
@@ -25,7 +25,7 @@ int bst_size(bst* b)
    return _size(b->top);
 }
 
-bool bst_insert(bst* b, datatype d)
+bool bst_insert(bst* b, treetype d)
 {
    if(b==NULL){
       return false;
@@ -78,7 +78,7 @@ char* _preorder(dataframe *t)
    return p;
 }
 
-bool bst_isin(bst* b, datatype d)
+bool bst_isin(bst* b, treetype d)
 {
    if(b==NULL){
       return false;
@@ -86,7 +86,7 @@ bool bst_isin(bst* b, datatype d)
    return _isin(b->top, d);
 }
 
-bool bst_insertarray(bst* b, datatype* a, int n)
+bool bst_insertarray(bst* b, treetype* a, int n)
 {
    int i;
    if((b==NULL) || (a==NULL) || (n<=0)){
@@ -148,7 +148,7 @@ void bst_todot(bst* b, char* fname)
 /*****************************************************************/
 
 /* Based on geekforgeeks.org */
-dataframe* _insert(dataframe* t, datatype d)
+dataframe* _insert(dataframe* t, treetype d)
 {
     dataframe* f;
     /* If the tree is empty, return a new frame */
@@ -168,7 +168,7 @@ dataframe* _insert(dataframe* t, datatype d)
     return t;
 }
 
-bool _isin(dataframe* t, datatype d)
+bool _isin(dataframe* t, treetype d)
 {
    if(t==NULL){
       return false;

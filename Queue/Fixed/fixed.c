@@ -1,5 +1,5 @@
-#include "specific.h"
 #include "../queue.h"
+#include "specific.h"
 
 void _inc(queuetype* p);
 

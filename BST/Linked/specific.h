@@ -1,13 +1,13 @@
 #include "../../General/bool.h"
 #include <string.h>
 
-typedef int datatype;
+typedef int treetype;
 #define FORMATSTR "%d"
 #define ELEMSIZE 20
 #define BSTTYPE "Linked"
 
 struct dataframe {
-   datatype d;
+   treetype d;
    struct dataframe* left;
    struct dataframe* right;
 };
