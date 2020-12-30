@@ -1,11 +1,11 @@
-typedef int datatype;
+typedef int queuetype;
 #define FORMATSTR "%d"
 #define ELEMSIZE 20
 
 #define QUEUETYPE "Linked"
 
 struct dataframe {
-   datatype i;
+   queuetype i;
    struct dataframe* next;
 };
 typedef struct dataframe dataframe;

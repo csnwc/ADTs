@@ -1,7 +1,7 @@
 #include "specific.h"
 #include "../queue.h"
 
-void _inc(datatype* p);
+void _inc(queuetype* p);
 
 queue* queue_init(void)
 {
@@ -10,7 +10,7 @@ queue* queue_init(void)
 }
 
 
-void queue_enqueue(queue* q, datatype d)
+void queue_enqueue(queue* q, queuetype d)
 {
    if(q){
       q->a[q->end] = d;
@@ -21,7 +21,7 @@ void queue_enqueue(queue* q, datatype d)
    }
 }
 
-bool queue_dequeue(queue* q, datatype* d)
+bool queue_dequeue(queue* q, queuetype* d)
 {
    if((q==NULL) || (q->front==q->end)){
       return false;
@@ -65,7 +65,7 @@ bool queue_free(queue* q)
    return true;
 }
 
-void _inc(datatype* p)
+void _inc(queuetype* p)
 {
    *p = (*p + 1) % BOUNDED;
 }

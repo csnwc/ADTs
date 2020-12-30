@@ -5,7 +5,7 @@
 int main(void)
 {
    queue* q;
-   datatype d;
+   queuetype d;
    char str[1000];
 
    srand(time(NULL));

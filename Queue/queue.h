@@ -10,9 +10,9 @@ typedef struct queue queue;
 /* Create an empty queue */
 queue* queue_init(void);
 /* Add element on end */
-void queue_enqueue(queue* q, datatype v);
+void queue_enqueue(queue* q, queuetype v);
 /* Take element off front */
-bool queue_dequeue(queue* q, datatype* d);
+bool queue_dequeue(queue* q, queuetype* d);
 /* Return size of queue */
 int queue_size(queue* q);
 /* Clears all space used */

@@ -12,7 +12,7 @@ int main(void)
 
    int i;
    char str[1000];
-   datatype d;
+   queuetype d;
    queue* q;
 
    printf("Basic Queue (%s) Tests ... Start\n", QUEUETYPE);

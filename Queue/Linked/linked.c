@@ -7,7 +7,7 @@ queue* queue_init(void)
    return q;
 }
 
-void queue_enqueue(queue* q, datatype d)
+void queue_enqueue(queue* q, queuetype d)
 {
    dataframe* f;
    if(q==NULL){
@@ -31,7 +31,7 @@ void queue_enqueue(queue* q, datatype d)
    q->size = q->size + 1;
 }
 
-bool queue_dequeue(queue* q, datatype* d)
+bool queue_dequeue(queue* q, queuetype* d)
 {
    dataframe* f;
    if((q==NULL) || (q->front==NULL) || (q->end==NULL)){

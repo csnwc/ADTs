@@ -1,4 +1,4 @@
-typedef int datatype;
+typedef int queuetype;
 #define FORMATSTR "%d"
 #define ELEMSIZE 20
 
@@ -8,7 +8,7 @@ typedef int datatype;
 
 struct queue {
    /* Underlying array */
-   datatype a[BOUNDED];
+   queuetype a[BOUNDED];
    int front;
    int end;
 };
