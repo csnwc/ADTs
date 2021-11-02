@@ -1,5 +1,4 @@
 #include "../General/general.h"
-#include "../General/bool.h"
 #include "../Queue/queue.h"
 
 #include <stdio.h>

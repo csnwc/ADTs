@@ -3,11 +3,24 @@
 
 coll* coll_init(void)
 {
-   coll *c = (coll*) ncalloc(sizeof(coll), 1);
+   coll* c = (coll*) ncalloc(sizeof(coll), 1);
    c->a = (colltype*) ncalloc(sizeof(colltype), FIXEDSIZE);
    c->size = 0;
    c->capacity= FIXEDSIZE;
    return c;
+}
+
+void coll_add(coll* c, colltype d)
+{
+   if(c){
+      c->a[c->size] = d;
+      c->size = c->size + 1;
+      if(c->size >= c->capacity){
+         c->a = (colltype*) nremalloc(c->a,
+                sizeof(colltype)*c->capacity*SCALEFACTOR);
+         c->capacity = c->capacity*SCALEFACTOR;
+      }
+   }
 }
 
 int coll_size(coll* c)
@@ -20,8 +33,7 @@ int coll_size(coll* c)
 
 bool coll_isin(coll* c, colltype d)
 {
-   int i;
-   for(i=0; i<coll_size(c); i++){
+   for(int i=0; i<coll_size(c); i++){
       if(c->a[i] == d){ 
           return true;
       }
@@ -29,27 +41,15 @@ bool coll_isin(coll* c, colltype d)
    return false;
 }
 
-void coll_add(coll* c, colltype d)
-{
-   if(c){
-      c->a[c->size] = d;
-      c->size = c->size + 1;
-      if(c->size >= c->capacity){
-         c->a = (colltype*) nremalloc(c->a, sizeof(colltype)*c->capacity*SCALEFACTOR);
-         c->capacity = c->capacity*SCALEFACTOR;
-      }
-   }
-}
 
 bool coll_remove(coll* c, colltype d)
 {
-   int i,j;
    bool found = false;
-   for(i=0; i<coll_size(c); i++){
+   for(int i=0; i<coll_size(c); i++){
       if(c->a[i] == d){ 
-          /* Shuffle end of array left one */
+         // Shuffle end of array left one :-(
          c->size = c->size - 1;
-         for(j=i; j<coll_size(c); j++){
+         for(int j=i; j<coll_size(c); j++){
             c->a[j] = c->a[j+1];
          }
          found = true;

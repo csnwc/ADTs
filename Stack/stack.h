@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../General/general.h"
-#include "../General/bool.h"
 
 typedef int stacktype;
 

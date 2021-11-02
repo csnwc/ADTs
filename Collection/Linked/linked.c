@@ -3,7 +3,7 @@
 
 coll* coll_init(void)
 {
-   coll *c = (coll*) ncalloc(sizeof(coll), 1);
+   coll* c = (coll*) ncalloc(sizeof(coll), 1);
    return c;
 }
 
@@ -17,11 +17,10 @@ int coll_size(coll* c)
 
 bool coll_isin(coll* c, colltype d)
 {
-   dataframe* f;
    if(c == NULL || c->start==NULL){
       return false;
    }
-   f = c->start;
+   dataframe* f = c->start;
    do{
       if(f->i == d){ 
           return true;
@@ -33,15 +32,29 @@ bool coll_isin(coll* c, colltype d)
 
 void coll_add(coll* c, colltype d)
 {
-   dataframe* f;
    if(c){
-      f = ncalloc(sizeof(dataframe), 1);
+      dataframe* f = ncalloc(sizeof(dataframe), 1);
       f->i = d;
       f->next = c->start;
       c->start = f;
       c->size = c->size + 1;
    }
       
+}
+
+bool coll_free(coll* c)
+{
+   if(c){
+      dataframe* tmp;
+      dataframe* p = c->start;
+      while(p!=NULL){
+         tmp = p->next;
+         free(p);
+         p = tmp;
+      }
+      free(c);
+   }
+   return true;
 }
 
 bool coll_remove(coll* c, colltype d)
@@ -51,7 +64,7 @@ bool coll_remove(coll* c, colltype d)
       return false;
    }
 
-   /* If Front */
+   // If Front 
    if(c->start->i == d){
       f1 = c->start->next;
       free(c->start);
@@ -73,19 +86,4 @@ bool coll_remove(coll* c, colltype d)
       f2 = f1->next;
    }while(f2 != NULL);
    return false;
-}
-
-bool coll_free(coll* c)
-{
-   if(c){
-      dataframe* tmp;
-      dataframe* p = c->start;
-      while(p!=NULL){
-         tmp = p->next;
-         free(p);
-         p = tmp;
-      }
-      free(c);
-   }
-   return true;
 }

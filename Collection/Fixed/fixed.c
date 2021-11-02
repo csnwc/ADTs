@@ -3,7 +3,7 @@
 
 coll* coll_init(void)
 {
-   coll *c = (coll*) ncalloc(sizeof(coll), 1);
+   coll* c = (coll*) ncalloc(sizeof(coll), 1);
    c->size = 0;
    return c;
 }
@@ -18,8 +18,7 @@ int coll_size(coll* c)
 
 bool coll_isin(coll* c, colltype  d)
 {
-   int i;
-   for(i=0; i<coll_size(c); i++){
+   for(int i=0; i<coll_size(c); i++){
       if(c->a[i] == d){ 
           return true;
       }
@@ -40,11 +39,10 @@ void coll_add(coll* c, colltype  d)
 
 bool coll_remove(coll* c, colltype d)
 {
-   int i,j;
-   for(i=0; i<coll_size(c); i++){
+   for(int i=0; i<coll_size(c); i++){
       if(c->a[i] == d){ 
-         /* Shuffle end of array left one */
-         for(j=i; j<coll_size(c); j++){
+         // Shuffle end of array left one
+         for(int j=i; j<coll_size(c); j++){
             c->a[j] = c->a[j+1];
          }
          c->size = c->size - 1;

@@ -9,7 +9,7 @@ struct dataframe {
 typedef struct dataframe dataframe;
 
 struct coll {
-   /* Underlying array */
+   // Underlying array
    dataframe* start;
    int size;
 };

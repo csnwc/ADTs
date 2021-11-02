@@ -1,4 +1,3 @@
-#include "../../General/bool.h"
 #include <string.h>
 
 typedef int treetype;

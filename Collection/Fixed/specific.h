@@ -4,7 +4,7 @@
 
 #define FIXEDSIZE 5000
 struct coll {
-   /* Underlying array */
+   // Underlying array
    colltype a[FIXEDSIZE];
    int size;
 };

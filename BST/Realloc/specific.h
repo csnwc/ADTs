@@ -1,4 +1,5 @@
-#include "../../General/bool.h"
+#include <stdbool.h>
+
 typedef int treetype;
 #define FORMATSTR "%d"
 #define ELEMSIZE 20
