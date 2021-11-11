@@ -120,7 +120,7 @@ void queue_todot(queue* q, char* fname)
    sprintf(str, "digraph { rankdir=LR; node [shape=record]; subgraph cluster_0 { rankdir=LR; color=white;\n");
    p = q->front;
    while(p){
-      sprintf(tmp, "n%d [label=\"{<data>", i++);
+      sprintf(tmp, "n%i [label=\"{<data>", i++);
       strcat(str, tmp);
       sprintf(tmp, FORMATSTR, p->i);
       strcat(str, tmp);
@@ -135,12 +135,12 @@ void queue_todot(queue* q, char* fname)
    n = i;
    /* One edge less than nodes */
    for(i=1; i<n-1; i++){
-      sprintf(tmp, "n%d:e -> n%d:w;\n", i, i+1);
+      sprintf(tmp, "n%i:e -> n%i:w;\n", i, i+1);
       strcat(str, tmp);
    }
    strcat(str ,"  front:e -> n1:data:w [tailclip=false];\n");
    strcat(str ,"  } node [shape=box, fixedsize=true, width=0.35, height=0.30]; front [color=white];\n");
-   sprintf(tmp, "end [color=white]; end -> n%d:nw;\n}\n", n-1);
+   sprintf(tmp, "end [color=white]; end -> n%i:nw;\n}\n", n-1);
    strcat(str,tmp);
    sprintf(tmp, "%s%s", QUEUETYPE, fname);
    fp = nfopen(tmp, "wt");

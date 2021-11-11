@@ -29,11 +29,11 @@ bool coll_isin(coll* c, colltype  d)
 void coll_add(coll* c, colltype  d)
 {
    if(c){
-      c->a[c->size] = d;
-      c->size = c->size + 1;
       if(c->size >= FIXEDSIZE){
          on_error("Collection overflow");
       }
+      c->a[c->size] = d;
+      c->size = c->size + 1;
    }
 }
 

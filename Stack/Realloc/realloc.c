@@ -19,12 +19,13 @@ void stack_push(stack* s, stacktype d)
    if(s==NULL){
        return;
    }
-   s->a[s->size] = d;
-   s->size = s->size + 1;
    if(s->size >= s->capacity){
-      s->a = (stacktype*) nremalloc(s->a, sizeof(stacktype)*s->capacity*SCALEFACTOR);
+      s->a = (stacktype*) nremalloc(s->a,
+             sizeof(stacktype)*s->capacity*SCALEFACTOR);
       s->capacity = s->capacity*SCALEFACTOR;
    }
+   s->a[s->size] = d;
+   s->size = s->size + 1;
 }
 
 bool stack_pop(stack* s, stacktype* d)
@@ -49,13 +50,12 @@ bool stack_peek(stack* s, stacktype* d)
 
 void stack_tostring(stack* s, char* str)
 {
-   int i;
    char tmp[ELEMSIZE];
    str[0] = '\0';
    if((s==NULL) || (s->size <1)){
       return;
    }
-   for(i=s->size-1; i>=0; i--){
+   for(int i=s->size-1; i>=0; i--){
       sprintf(tmp, FORMATSTR, s->a[i]); 
       strcat(str, tmp);
       strcat(str, "|");

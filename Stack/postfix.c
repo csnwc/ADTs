@@ -6,10 +6,9 @@
 int main(void)
 {
    char input[MAXINPUT];
-   stack* s;
    stacktype d, g1, g2;
 
-   s = stack_init();
+   stack* s = stack_init();
    while(fgets(input, MAXINPUT, stdin)){
       /* If number push */
       if(sscanf(input, FORMATSTR, &d)==1){
@@ -33,7 +32,7 @@ int main(void)
                d = g1 / g2;
                break;
             default:
-               fprintf(stderr, "Can't understand that ? %d\n", input[0]);
+               fprintf(stderr, "Can't understand that ? %i\n", input[0]);
                exit(EXIT_FAILURE);
          }
          stack_push(s, d);

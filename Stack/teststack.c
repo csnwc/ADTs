@@ -5,7 +5,6 @@ int main(void)
 {
    stacktype d;
    char str[1000];
-   int i;
    stack* s;
    printf("Test Stack (%s) Start ... ", STACKTYPE);
 
@@ -40,10 +39,10 @@ int main(void)
    assert(stack_peek(s, &d));
    assert(d == 30);
    assert(stack_pop(s,&d)); assert(d==30);
-   for(i=0; i<400000; i++){
+   for(int i=0; i<400000; i++){
       stack_push(s,i);
    }
-   for(i=399999; i>=0; i--){
+   for(int i=399999; i>=0; i--){
       assert(stack_pop(s,&d)); assert(d==i);
    }
    assert(stack_pop(s,&d)); assert(d==5);

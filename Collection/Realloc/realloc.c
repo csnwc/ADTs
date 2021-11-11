@@ -13,13 +13,13 @@ coll* coll_init(void)
 void coll_add(coll* c, colltype d)
 {
    if(c){
-      c->a[c->size] = d;
-      c->size = c->size + 1;
       if(c->size >= c->capacity){
          c->a = (colltype*) nremalloc(c->a,
                 sizeof(colltype)*c->capacity*SCALEFACTOR);
          c->capacity = c->capacity*SCALEFACTOR;
       }
+      c->a[c->size] = d;
+      c->size = c->size + 1;
    }
 }
 

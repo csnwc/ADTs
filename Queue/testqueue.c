@@ -9,8 +9,6 @@
 
 int main(void)
 {
-
-   int i;
    char str[1000];
    queuetype d;
    queue* q;
@@ -46,15 +44,15 @@ int main(void)
    assert(queue_dequeue(q, &d));
    assert(queue_size(q) == 0);
 
-   for(i=1; i<LOOPTEST/2; i++){
+   for(int i=1; i<LOOPTEST/2; i++){
       queue_enqueue(q,i);
       assert(queue_size(q) == i);
    }
-   for(i=1; i<LOOPTEST/2; i++){
+   for(int i=1; i<LOOPTEST/2; i++){
       assert(queue_dequeue(q, &d));
       assert(queue_size(q) == LOOPTEST/2-i-1);
    }
-   for(i=1; i<LOOPTEST; i++){
+   for(int i=1; i<LOOPTEST; i++){
       queue_enqueue(q,i);
       assert(queue_dequeue(q, &d));
       assert(d==i);

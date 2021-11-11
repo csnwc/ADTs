@@ -33,13 +33,12 @@ bool queue_dequeue(queue* q, queuetype* d)
 
 void queue_tostring(queue* q, char* str)
 {
-   int i;
    char tmp[ELEMSIZE];
    str[0] = '\0';
    if((q==NULL) || (queue_size(q)==0)){
       return;
    }
-   for(i=q->front; i != q->end;){
+   for(int i=q->front; i != q->end;){
       sprintf(tmp, FORMATSTR, q->a[i]); 
       strcat(str, tmp);
       strcat(str, "|");
