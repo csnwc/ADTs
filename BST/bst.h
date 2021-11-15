@@ -10,7 +10,7 @@ bst* bst_init(void);
 /* Insert 1 item into the tree */
 bool bst_insert(bst* b, treetype d);
 
-/* Return number of treetypes in tree */
+/* Return number of nodes in tree */
 int bst_size(bst* b);
 
 /* Whether the data d is stored in the tree */
@@ -25,11 +25,8 @@ bool bst_free(bst* b);
 /* Optional ? */
 
 char* bst_preorder(bst* b);
-
 void bst_printlevel(bst* b);
-
 /* Create string with tree as ((head)(left)(right)) */
 char* bst_printlisp(bst* b);
-
 /* Use Graphviz via a .dot file */
 void bst_todot(bst* b, char* dotname);

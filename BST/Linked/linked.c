@@ -88,11 +88,10 @@ bool bst_isin(bst* b, treetype d)
 
 bool bst_insertarray(bst* b, treetype* a, int n)
 {
-   int i;
    if((b==NULL) || (a==NULL) || (n<=0)){
       return false;
    }
-   for(i=0; i<n; i++){
+   for(int i=0; i<n; i++){
       bst_insert(b, a[i]);
    }
    return true;

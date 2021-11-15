@@ -1,7 +1,7 @@
 #include <string.h>
 
 typedef int treetype;
-#define FORMATSTR "%d"
+#define FORMATSTR "%i"
 #define ELEMSIZE 20
 #define BSTTYPE "Linked"
 

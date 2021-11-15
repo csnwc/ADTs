@@ -50,11 +50,10 @@ bool bst_isin(bst* b, treetype d)
 
 bool bst_insertarray(bst* b, treetype* a, int n)
 {
-   int i;
    if((b==NULL) || (a==NULL) || (n<=0)){
       return false;
    }
-   for(i=0; i<n; i++){
+   for(int i=0; i<n; i++){
       bst_insert(b, a[i]);
    }
    return true;
@@ -73,13 +72,11 @@ bool bst_free(bst* b)
 void bst_printlevel(bst* b)
 {
    treetype n;
-   queue *q;
-
    if((b==NULL) || (! _isvalid(b, 0))){
       return;
    }
    /* Make a queue of cell indices */
-   q = queue_init();
+   queue* q = queue_init();
    queue_enqueue(q, 0);
    while(queue_dequeue(q, &n) && _isvalid(b, (int)n)){
       printf(FORMATSTR, b->a[n].d);
@@ -113,19 +110,16 @@ char* bst_printlisp(bst* b)
 void bst_todot(bst* b, char* fname)
 {
 
-   FILE* fp;
-   char* str;
-   char* opname;
    if(b==NULL){
       return;
    }
-   str = ncalloc(1, (ELEMSIZE+NODELINE)*b->capacity);
+   char* str = ncalloc(1, (ELEMSIZE+NODELINE)*b->capacity);
    sprintf(str, "digraph G {\n   node [shape=record, height=0.1];\n");
    _todot(b, 0, str);
    strcat(str, "}\n");
-   opname = ncalloc(1, strlen(fname)+strlen(BSTTYPE)+1);
+   char* opname = ncalloc(1, strlen(fname)+strlen(BSTTYPE)+1);
    sprintf(opname, "%s%s", BSTTYPE, fname);
-   fp = nfopen(opname, "wt"); 
+   FILE* fp = nfopen(opname, "wt"); 
    fprintf(fp, "%s", str);
    fclose(fp);
    free(str);
@@ -141,13 +135,12 @@ void bst_todot(bst* b, char* fname)
 /* Based on geekforgeeks.org */
 bool _insert(bst* b, treetype d, int c)
 {
-    treetype i;
     if (!_isvalid(b, c)){
        _write(b, d, c);
        return true;
     }
     /* Otherwise, recurs down the tree */
-    i = b->a[c].d;
+    treetype i = b->a[c].d;
     if (d < i){
         return _insert(b, d, _leftchild(c));
     }
@@ -160,11 +153,10 @@ bool _insert(bst* b, treetype d, int c)
 
 bool _isin(bst* b, treetype d, int c)
 {
-   treetype i;
    if (!_isvalid(b, c)){
       return false;
    }
-   i = b->a[c].d;
+   treetype i = b->a[c].d;
    if(i == d){
       return true;
    }
@@ -223,17 +215,16 @@ bool _isvalid(bst* b, int c)
 
 char* _printlisp(bst* b, int c)
 {
-   char tmp[ELEMSIZE];
-   char *s1, *s2, *p;
-   
+   char* p;
    if(! _isvalid(b, c)){
       /*  \0 string */
       p = ncalloc(1,1);
       return p;
    }
+   char tmp[ELEMSIZE];
    sprintf(tmp, FORMATSTR, b->a[c].d);
-   s1 = _printlisp(b,  _leftchild(c));
-   s2 = _printlisp(b, _rightchild(c));
+   char* s1 = _printlisp(b,  _leftchild(c));
+   char* s2 = _printlisp(b, _rightchild(c));
    p = ncalloc(strlen(s1)+strlen(s2)+strlen(tmp)+strlen("()() "), 1);
    sprintf(p, "%s(%s)(%s)", tmp, s1, s2);
    free(s1);
@@ -250,12 +241,12 @@ void _todot(bst* b, int c, char* nodes)
       return;
    }
    sprintf(fstr, FORMATSTR, b->a[c].d);
-   sprintf(tmp, "   node%d [label = \"<l> | <m> %s | <r>\"];\n", c, fstr);
+   sprintf(tmp, "   node%i [label = \"<l> | <m> %s | <r>\"];\n", c, fstr);
    strcat(nodes, tmp);
    /* Not top of tree */
    if(c>0){
       p = _parent(c);
-      sprintf(tmp, "   node%d:%c -> node%d:m;\n", p, (c%2)?'l':'r', c);
+      sprintf(tmp, "   node%i:%c -> node%i:m;\n", p, (c%2)?'l':'r', c);
       strcat(nodes, tmp);
    }
    _todot(b,  _leftchild(c), nodes);

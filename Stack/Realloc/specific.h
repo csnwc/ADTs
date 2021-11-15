@@ -1,6 +1,6 @@
 #pragma once
 
-#define FORMATSTR "%d"
+#define FORMATSTR "%i"
 #define ELEMSIZE 20
 
 #define STACKTYPE "Realloc"
