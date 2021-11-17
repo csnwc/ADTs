@@ -215,7 +215,8 @@ char* _printlisp(dataframe* t)
    sprintf(tmp, FORMATSTR, t->d);
    s1 = _printlisp(t->left);
    s2 = _printlisp(t->right);
-   p = ncalloc(strlen(s1)+strlen(s2)+strlen(tmp)+strlen("()() "), 1);
+   p = ncalloc(strlen(s1)+strlen(s2)+strlen(tmp)+
+       strlen("()() "), 1);
    sprintf(p, "%s(%s)(%s)", tmp, s1, s2);
    free(s1);
    free(s2);
