@@ -3,7 +3,7 @@
 
 coll* coll_init(void)
 {
-   coll* c = (coll*) ncalloc(sizeof(coll), 1);
+   coll* c = (coll*) ncalloc(1, sizeof(coll));
    c->size = 0;
    return c;
 }

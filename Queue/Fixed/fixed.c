@@ -5,7 +5,7 @@ void _inc(queuetype* p);
 
 queue* queue_init(void)
 {
-   queue* q = (queue*) ncalloc(sizeof(queue), 1);
+   queue* q = (queue*) ncalloc(1, sizeof(queue));
    return q;
 }
 

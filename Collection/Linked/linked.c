@@ -3,7 +3,7 @@
 
 coll* coll_init(void)
 {
-   coll* c = (coll*) ncalloc(sizeof(coll), 1);
+   coll* c = (coll*) ncalloc(1, sizeof(coll));
    return c;
 }
 
@@ -33,7 +33,7 @@ bool coll_isin(coll* c, colltype d)
 void coll_add(coll* c, colltype d)
 {
    if(c){
-      dataframe* f = ncalloc(sizeof(dataframe), 1);
+      dataframe* f = ncalloc(1, sizeof(dataframe));
       f->i = d;
       f->next = c->start;
       c->start = f;

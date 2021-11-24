@@ -5,10 +5,10 @@
 
 stack* stack_init(void)
 {
-   stack *s = (stack*) ncalloc(sizeof(stack), 1);
+   stack *s = (stack*) ncalloc(1, sizeof(stack));
    /* Some implementations would allow you to pass
       a hint about the initial size of the stack */
-   s->a = (stacktype*) ncalloc(sizeof(stacktype), FIXEDSIZE);
+   s->a = (stacktype*) ncalloc(FIXEDSIZE, sizeof(stacktype));
    s->size = 0;
    s->capacity= FIXEDSIZE;
    return s;

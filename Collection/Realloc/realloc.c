@@ -3,8 +3,8 @@
 
 coll* coll_init(void)
 {
-   coll* c = (coll*) ncalloc(sizeof(coll), 1);
-   c->a = (colltype*) ncalloc(sizeof(colltype), FIXEDSIZE);
+   coll* c = (coll*) ncalloc(1, sizeof(coll));
+   c->a = (colltype*) ncalloc(FIXEDSIZE, sizeof(colltype));
    c->size = 0;
    c->capacity= FIXEDSIZE;
    return c;

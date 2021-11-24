@@ -3,7 +3,7 @@
 
 queue* queue_init(void)
 {
-   queue* q = (queue*) ncalloc(sizeof(queue), 1);
+   queue* q = (queue*) ncalloc(1, sizeof(queue));
    return q;
 }
 
@@ -15,7 +15,7 @@ void queue_enqueue(queue* q, queuetype d)
    }
 
    /* Copy the data */
-   f = ncalloc(sizeof(dataframe), 1);
+   f = ncalloc(1, sizeof(dataframe));
    f->i = d;
 
    /* 1st one */

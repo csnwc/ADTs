@@ -5,14 +5,14 @@
 
 stack* stack_init(void)
 {
-   stack* s = (stack*) ncalloc(sizeof(stack), 1);
+   stack* s = (stack*) ncalloc(1, sizeof(stack));
    return s;
 }
 
 void stack_push(stack* s, stacktype d)
 {
    if(s){
-      dataframe* f = ncalloc(sizeof(dataframe), 1);
+      dataframe* f = ncalloc(1, sizeof(dataframe));
       f->i = d;
       f->next = s->start;
       s->start = f;
