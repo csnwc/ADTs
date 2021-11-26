@@ -5,7 +5,6 @@
 edge graph_salesman(graph* g, int from, char* str)
 {
    bool* unvis;
-   int v;
    int curr, ncurr, nvs;
    edge cst, bcst, e;
 
@@ -14,7 +13,7 @@ edge graph_salesman(graph* g, int from, char* str)
       return INF;
    }
    unvis = (bool*)ncalloc(nvs, sizeof(bool));
-   for(v=0; v<nvs; v++){
+   for(int v=0; v<nvs; v++){
       unvis[v] = true;
    }
    curr = from;
@@ -25,7 +24,7 @@ edge graph_salesman(graph* g, int from, char* str)
       cst = INF;
       ncurr = NO_VERT;
       /* Look at neighbours of curr */
-      for(v=0; v<nvs; v++){
+      for(int v=0; v<nvs; v++){
          e = graph_getEdgeWeight(g, curr, v);
          if((v!=curr) && unvis[v] && (e!=INF)){
             if(e < cst){
@@ -46,7 +45,7 @@ edge graph_salesman(graph* g, int from, char* str)
    return bcst;
 }
    
-/* Not efficient : Use a min heap instead */
+/* Not efficient : Should use a min heap instead */
 edge graph_dijkstra(graph* g, int from, int to)
 {
    bool* unvis;
@@ -98,5 +97,4 @@ edge graph_dijkstra(graph* g, int from, int to)
    /* No route */
    free(dist); free(unvis);
    return INF;
-
 }

@@ -8,26 +8,23 @@ bool _addEdge(vertex* f, vertex* t, edge w);
 
 graph* graph_init(void)
 {
-   graph* g = (graph*) ncalloc(sizeof(graph), 1);
+   graph* g = (graph*) ncalloc(1, sizeof(graph));
    return g;
 }
 
 edge graph_getEdgeWeight(graph* g, int from, int to)
 {
-   int i;
-   vertex *v;
-   edgel* e;
    if((g==NULL) || (from >= g->size) || (to >= g->size)){
       return INF;
    }
-   v = g->firstv;
-   for(i=0; i<from; i++){
+   vertex* v = g->firstv;
+   for(int i=0; i<from; i++){
       v = v->nextv;
    }
    if((v==NULL) || (v->num != from)){
       return INF;
    }
-   e = v->firste;
+   edgel* e = v->firste;
    while(e != NULL){
       if(e->v->num == to){
          return e->weight;
@@ -47,20 +44,18 @@ int graph_numVerts(graph* g)
 
 bool graph_free(graph* g)
 {
-   vertex* v, *tv;
-   edgel* e, *te;
    if(g==NULL){
       return false;
    }
-   v = g->firstv;
+   vertex* v = g->firstv;
    while(v != NULL){
-      e = v->firste;
+      edgel* e = v->firste;
       while(e != NULL){
-         te = e->nexte;
+         edgel* te = e->nexte;
          free(e);
          e = te;
       }
-      tv = v->nextv;
+      vertex* tv = v->nextv;
       free(v->label);
       free(v);
       v = tv;
@@ -72,7 +67,6 @@ bool graph_free(graph* g)
 int graph_addVert(graph* g, char* label)
 {
 
-   vertex* n;
    if(g==NULL){
       return NO_VERT;
    }
@@ -80,8 +74,8 @@ int graph_addVert(graph* g, char* label)
       return NO_VERT;
    }
 
-   n = ncalloc(sizeof(vertex), 1);
-   n->label = ncalloc(strlen(label)+1, 1);
+   vertex* n = ncalloc(1, sizeof(vertex));
+   n->label = ncalloc(1, strlen(label)+1);
    strcpy(n->label, label);
    if(g->firstv == NULL){
       /* Put in front */
@@ -99,21 +93,18 @@ int graph_addVert(graph* g, char* label)
 
 bool graph_addEdge(graph* g, int from, int to, edge w)
 {
-   vertex* f;
-   vertex* t;
-   int i;
    if((g==NULL) || (g->size == 0)){
       return false;
    }
    if((from >= g->size) || (to >= g->size)){
       return false;
    }
-   f = g->firstv;
-   for(i=0; i<from; i++){
+   vertex* f = g->firstv;
+   for(int i=0; i<from; i++){
       f = f->nextv;
    }
-   t = g->firstv;
-   for(i=0; i<to; i++){
+   vertex* t = g->firstv;
+   for(int i=0; i<to; i++){
       t = t->nextv;
    }
    return _addEdge(f, t, w);
@@ -121,21 +112,17 @@ bool graph_addEdge(graph* g, int from, int to, edge w)
 
 void graph_todot(graph* g, char* dotname)
 {
-   vertex* v;
-   edgel* e;
-   char* fname;
-   FILE* fp;
-   fname = ncalloc(1,strlen(dotname)+strlen(GRAPHTYPE)+1);
+   char* fname = ncalloc(1,strlen(dotname)+strlen(GRAPHTYPE)+1);
    sprintf(fname, "%s%s", GRAPHTYPE, dotname);
-   fp = nfopen(fname, "wt");
+   FILE* fp = nfopen(fname, "wt");
    fprintf(fp,"digraph {\n");
 
-   v = g->firstv;
+   vertex* v = g->firstv;
    /* Edge Weights */
    while(v != NULL){
-      e = v->firste;
+      edgel* e = v->firste;
       while(e != NULL){
-         fprintf(fp, "   %s -> %s[label=\"%d\"];\n",
+         fprintf(fp, "   %s -> %s[label=\"%i\"];\n",
             v->label, e->v->label, e->weight);
          e = e->nexte;
       }
@@ -148,14 +135,11 @@ void graph_todot(graph* g, char* dotname)
 
 char* graph_getLabel(graph* g, int vtx)
 {
-
-   vertex* v;
-   int i;
    if((g==NULL) || (vtx >= g->size)){
       return NULL;
    }
-   v = g->firstv;
-   for(i=0; i<vtx; i++){
+   vertex* v = g->firstv;
+   for(int i=0; i<vtx; i++){
       v = v->nextv;
    }
    return v->label;
@@ -164,8 +148,7 @@ char* graph_getLabel(graph* g, int vtx)
 int graph_getVertNum(graph* g, char* label)
 {
    int cnt = 0;
-   vertex* v;
-   v = g->firstv;
+   vertex* v = g->firstv;
    while(v != NULL){
       if(strcmp(v->label, label)==0){
          return cnt;
@@ -178,14 +161,12 @@ int graph_getVertNum(graph* g, char* label)
 
 void graph_tostring(graph* g, char* str)
 {
-   vertex* v;
-   edgel* e;
    char tmp[TMPSTR];
    str[0] = '\0';
    if(g==NULL){
       return;
    }
-   v = g->firstv;
+   vertex* v = g->firstv;
    while(v != NULL){
       sprintf(tmp, "%s ", v->label);
       strcat(str, tmp);
@@ -194,9 +175,9 @@ void graph_tostring(graph* g, char* str)
    v = g->firstv;
    /* Edge Weights */
    while(v != NULL){
-      e = v->firste;
+      edgel* e = v->firste;
       while(e != NULL){
-         sprintf(tmp, "%d->%d %d ", v->num, e->v->num, e->weight);
+         sprintf(tmp, "%i->%i %i ", v->num, e->v->num, e->weight);
          strcat(str, tmp);
          e = e->nexte;
       }
@@ -215,7 +196,7 @@ bool _addEdge(vertex* f, vertex* t, edge w)
    edgel* b;
    if(f->firste ==NULL){
       /* 1st */
-      e = ncalloc(sizeof(edgel), 1);
+      e = ncalloc(1, sizeof(edgel));
       f->firste = e;
       e->v = t;
       e->weight = w;
@@ -231,7 +212,7 @@ bool _addEdge(vertex* f, vertex* t, edge w)
       e = e->nexte;
    }
    /* Add to end */
-   b->nexte = ncalloc(sizeof(edgel), 1);
+   b->nexte = ncalloc(1, sizeof(edgel));
    b->nexte->v = t;
    b->nexte->weight = w;
    return true;
