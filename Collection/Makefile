@@ -45,4 +45,4 @@ run: all
 	./testlinked_s
 	valgrind --quiet ./testfixed_v
 	valgrind --quiet ./testrealloc_v
-	valgrind --quiet ./testfixed_v
+	valgrind --quiet ./testlinked_v
