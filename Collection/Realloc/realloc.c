@@ -4,9 +4,9 @@
 coll* coll_init(void)
 {
    coll* c = (coll*) ncalloc(1, sizeof(coll));
-   c->a = (colltype*) ncalloc(FIXEDSIZE, sizeof(colltype));
+   c->a = (colltype*) ncalloc(INITSIZE, sizeof(colltype));
    c->size = 0;
-   c->capacity= FIXEDSIZE;
+   c->capacity= INITSIZE;
    return c;
 }
 

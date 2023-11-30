@@ -2,7 +2,7 @@
 
 #define COLLTYPE "Realloc"
 
-#define FIXEDSIZE 16
+#define INITSIZE 16
 #define SCALEFACTOR 2
 struct coll {
    // Underlying array
