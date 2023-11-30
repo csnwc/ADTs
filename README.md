@@ -1,4 +1,4 @@
 # ADTs
 COMSM1201 ADTs 
 
-Includes: Collection, Stack, Queue, BST and Graph
+Includes: Collection, Deque (Stacks, Queues), BST and Graph
