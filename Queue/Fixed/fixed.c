@@ -1,7 +1,7 @@
 #include "../queue.h"
 #include "specific.h"
 
-void _inc(queuetype* p);
+void _inc(int* p);
 
 queue* queue_init(void)
 {
@@ -64,7 +64,7 @@ bool queue_free(queue* q)
    return true;
 }
 
-void _inc(queuetype* p)
+void _inc(int* p)
 {
    *p = (*p + 1) % BOUNDED;
 }
