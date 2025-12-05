@@ -6,7 +6,7 @@ VALGRIND= $(COMMON) $(DEBUG)
 PRODUCTION= $(COMMON) -O3
 LDLIBS=
 
-all: testfixed testfixed_s testfixed_v testlinked testlinked_s testlinked_v pdfs simslow
+all: testfixed testfixed_s testfixed_v testlinked testlinked_s testlinked_v pdfs simslow simslow_l_prof
 
 testfixed: queue.h Fixed/specific.h Fixed/fixed.c testqueue.c ../General/general.h ../General/general.c
 	$(CC) testqueue.c Fixed/fixed.c ../General/general.c -o testfixed -I./Fixed $(PRODUCTION) $(LDLIBS)
@@ -30,11 +30,14 @@ testlinked_v: queue.h Linked/specific.h Linked/linked.c testqueue.c ../General/g
 simslow: queue.h Fixed/specific.h Fixed/fixed.c simslow.c ../General/general.h ../General/general.c
 	$(CC) simslow.c Fixed/fixed.c ../General/general.c -o simslow -I./Fixed $(SANITIZE) $(LDLIBS)
 
+simslow_l_prof: queue.h Linked/specific.h Linked/linked.c simslow.c ../General/general.h ../General/general.c
+	$(CC) simslow.c Linked/linked.c ../General/general.c -o simslow_l_prof -I./Linked -pg $(LDLIBS)
+
 
 
 
 clean:
-	rm -f testfixed testfixed_s testfixed_v testlinked testlinked_s testlinked_v Linkedq.dot Fixedq.dot Fixedq.pdf Linkedq.pdf simslow 
+	rm -f testfixed testfixed_s testfixed_v testlinked testlinked_s testlinked_v Linkedq.dot Fixedq.dot Fixedq.pdf Linkedq.pdf simslow simslow_l_prof gmon.out
 
 run: all
 	./testfixed_s

@@ -6,11 +6,11 @@ int main(void)
 {
    queue* q;
    queuetype d;
-   char str[1000];
+   static char str[10000000];
 
    srand(time(NULL));
    q = queue_init();
-   while(queue_size(q) < 10){
+   while(queue_size(q) < 5000){
       /* Slow output */
       if(rand()%10 < 1){
          queue_dequeue(q, &d);
@@ -21,7 +21,7 @@ int main(void)
          queue_enqueue(q, d);
       }
       queue_tostring(q, str);
-      printf("Queue : %s\n", str);
+      //printf("Queue : %s\n", str);
    }
          
    queue_free(q);

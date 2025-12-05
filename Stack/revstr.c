@@ -9,7 +9,7 @@ int main(void)
    stack* s;
    stacktype d;
 
-   strcpy(str, "A man, a plan, a cat, a canal – Panama!");
+   strcpy(str, "A man, a plan, a cat, a canal - Panama!");
 
    s = stack_init();
    for(i=0; i< strlen(str); i++){
